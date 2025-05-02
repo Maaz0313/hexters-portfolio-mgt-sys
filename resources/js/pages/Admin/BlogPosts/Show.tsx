@@ -59,14 +59,14 @@ const Show = ({ blogPost }: Props) => {
       <Head title={`Blog Post: ${blogPost.title}`} />
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div className="p-6 bg-white border-b border-gray-200">
+          <div className="bg-card overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="p-6 bg-card border-b border-border">
               <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">{blogPost.title}</h1>
+                <h1 className="title-text text-2xl font-bold text-primary">{blogPost.title}</h1>
                 <div className="flex space-x-2">
                   <Link
                     href={route('admin.blog-posts.index')}
-                    className="inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-400 active:bg-gray-500 focus:outline-none focus:border-gray-500 focus:ring ring-gray-300 disabled:opacity-25 transition"
+                    className="inline-flex items-center px-4 py-2 bg-muted border border-transparent rounded-md font-semibold text-xs text-muted-foreground uppercase tracking-widest hover:bg-muted/80 focus:outline-none focus:ring ring-muted disabled:opacity-25 transition cursor-pointer"
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back
@@ -74,14 +74,14 @@ const Show = ({ blogPost }: Props) => {
                   <Link
                     href={route('blog.show', blogPost.slug)}
                     target="_blank"
-                    className="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-800 focus:outline-none focus:border-green-800 focus:ring ring-green-300 disabled:opacity-25 transition"
+                    className="inline-flex items-center px-4 py-2 bg-accent border border-transparent rounded-md font-semibold text-xs text-accent-foreground uppercase tracking-widest hover:bg-accent/80 focus:outline-none focus:ring ring-accent disabled:opacity-25 transition cursor-pointer"
                   >
                     <Eye className="mr-2 h-4 w-4" />
                     View
                   </Link>
                   <Link
                     href={route('admin.blog-posts.edit', blogPost.id)}
-                    className="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:border-blue-800 focus:ring ring-blue-300 disabled:opacity-25 transition"
+                    className="inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs text-primary-foreground uppercase tracking-widest hover:bg-primary/90 focus:outline-none focus:ring ring-primary disabled:opacity-25 transition cursor-pointer"
                   >
                     <Edit className="mr-2 h-4 w-4" />
                     Edit
@@ -90,7 +90,7 @@ const Show = ({ blogPost }: Props) => {
                     href={route('admin.blog-posts.destroy', blogPost.id)}
                     method="delete"
                     as="button"
-                    className="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-800 focus:outline-none focus:border-red-800 focus:ring ring-red-300 disabled:opacity-25 transition"
+                    className="inline-flex items-center px-4 py-2 bg-destructive border border-transparent rounded-md font-semibold text-xs text-destructive-foreground uppercase tracking-widest hover:bg-destructive/90 focus:outline-none focus:ring ring-destructive disabled:opacity-25 transition cursor-pointer"
                     onClick={(e) => {
                       if (!confirm('Are you sure you want to delete this blog post?')) {
                         e.preventDefault();
@@ -119,49 +119,49 @@ const Show = ({ blogPost }: Props) => {
 
                   {/* Content */}
                   <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-2">Content</h2>
-                    <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: blogPost.content }} />
+                    <h2 className="text-lg font-medium text-primary mb-2">Content</h2>
+                    <div className="prose max-w-none text-card-foreground" dangerouslySetInnerHTML={{ __html: blogPost.content }} />
                   </div>
                 </div>
 
                 <div className="space-y-6">
                   {/* Status */}
                   <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-2">Status</h2>
-                    <div className="bg-gray-100 rounded-md p-4">
+                    <h2 className="text-lg font-medium text-primary mb-2">Status</h2>
+                    <div className="bg-muted rounded-md p-4">
                       <div className="flex items-center mb-2">
-                        <span className="font-medium text-gray-700 mr-2">Status:</span>
-                        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${blogPost.is_published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                        <span className="font-medium text-card-foreground mr-2">Status:</span>
+                        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${blogPost.is_published ? 'bg-accent/20 text-accent' : 'bg-muted-foreground/20 text-muted-foreground'}`}>
                           {blogPost.is_published ? 'Published' : 'Draft'}
                         </span>
                       </div>
                       {blogPost.published_at && (
                         <div className="flex items-center mb-2">
-                          <span className="font-medium text-gray-700 mr-2">Published:</span>
-                          <span className="text-gray-600">{format(new Date(blogPost.published_at), 'MMM d, yyyy')}</span>
+                          <span className="font-medium text-card-foreground mr-2">Published:</span>
+                          <span className="text-muted-foreground">{format(new Date(blogPost.published_at), 'MMM d, yyyy')}</span>
                         </div>
                       )}
                       <div className="flex items-center mb-2">
-                        <span className="font-medium text-gray-700 mr-2">Created:</span>
-                        <span className="text-gray-600">{format(new Date(blogPost.created_at), 'MMM d, yyyy')}</span>
+                        <span className="font-medium text-card-foreground mr-2">Created:</span>
+                        <span className="text-muted-foreground">{format(new Date(blogPost.created_at), 'MMM d, yyyy')}</span>
                       </div>
                       <div className="flex items-center">
-                        <span className="font-medium text-gray-700 mr-2">Updated:</span>
-                        <span className="text-gray-600">{format(new Date(blogPost.updated_at), 'MMM d, yyyy')}</span>
+                        <span className="font-medium text-card-foreground mr-2">Updated:</span>
+                        <span className="text-muted-foreground">{format(new Date(blogPost.updated_at), 'MMM d, yyyy')}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Author */}
                   <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-2">Author</h2>
-                    <div className="bg-gray-100 rounded-md p-4">
+                    <h2 className="text-lg font-medium text-primary mb-2">Author</h2>
+                    <div className="bg-muted rounded-md p-4">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+                        <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
                           {blogPost.user.name.charAt(0)}
                         </div>
                         <div className="ml-3">
-                          <p className="text-sm font-medium text-gray-900">{blogPost.user.name}</p>
+                          <p className="text-sm font-medium text-card-foreground">{blogPost.user.name}</p>
                         </div>
                       </div>
                     </div>
@@ -169,33 +169,33 @@ const Show = ({ blogPost }: Props) => {
 
                   {/* Category */}
                   <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-2">Category</h2>
-                    <div className="bg-gray-100 rounded-md p-4">
+                    <h2 className="text-lg font-medium text-primary mb-2">Category</h2>
+                    <div className="bg-muted rounded-md p-4">
                       {blogPost.category ? (
-                        <span className="text-gray-700">{blogPost.category.name}</span>
+                        <span className="text-card-foreground">{blogPost.category.name}</span>
                       ) : (
-                        <span className="text-gray-500 italic">Uncategorized</span>
+                        <span className="text-muted-foreground italic">Uncategorized</span>
                       )}
                     </div>
                   </div>
 
                   {/* Tags */}
                   <div>
-                    <h2 className="text-lg font-medium text-gray-900 mb-2">Tags</h2>
-                    <div className="bg-gray-100 rounded-md p-4">
+                    <h2 className="text-lg font-medium text-primary mb-2">Tags</h2>
+                    <div className="bg-muted rounded-md p-4">
                       {blogPost.tags.length > 0 ? (
                         <div className="flex flex-wrap gap-2">
                           {blogPost.tags.map((tag) => (
                             <span
                               key={tag.id}
-                              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent/20 text-accent"
                             >
                               {tag.name}
                             </span>
                           ))}
                         </div>
                       ) : (
-                        <span className="text-gray-500 italic">No tags</span>
+                        <span className="text-muted-foreground italic">No tags</span>
                       )}
                     </div>
                   </div>
@@ -203,9 +203,9 @@ const Show = ({ blogPost }: Props) => {
                   {/* Excerpt */}
                   {blogPost.excerpt && (
                     <div>
-                      <h2 className="text-lg font-medium text-gray-900 mb-2">Excerpt</h2>
-                      <div className="bg-gray-100 rounded-md p-4">
-                        <p className="text-gray-700">{blogPost.excerpt}</p>
+                      <h2 className="text-lg font-medium text-primary mb-2">Excerpt</h2>
+                      <div className="bg-muted rounded-md p-4">
+                        <p className="text-card-foreground">{blogPost.excerpt}</p>
                       </div>
                     </div>
                   )}

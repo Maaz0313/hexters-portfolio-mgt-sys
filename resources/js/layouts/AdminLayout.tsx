@@ -16,12 +16,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Mobile sidebar toggle */}
       <div className="lg:hidden fixed top-0 left-0 z-20 p-4">
         <button
           onClick={toggleSidebar}
-          className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
+          className="text-foreground hover:text-primary focus:outline-none focus:text-primary"
         >
           {sidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
@@ -29,33 +29,33 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-10 w-64 bg-gray-800 text-white transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-10 w-64 bg-card text-card-foreground transform transition-transform duration-300 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
-        <div className="p-6 border-b border-gray-700">
-          <Link href={route('admin.dashboard')} className="text-xl font-bold text-white">
+        <div className="p-6 border-b border-border">
+          <Link href={route('admin.dashboard')} className="title-text text-xl font-bold text-primary">
             Admin Dashboard
           </Link>
         </div>
 
         <nav className="mt-6">
-          <div className="px-4 py-2 text-xs text-gray-400 uppercase">Main</div>
+          <div className="px-4 py-2 text-xs text-muted-foreground uppercase">Main</div>
           <Link
             href={route('admin.dashboard')}
-            className={`flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white ${
-              component === 'Admin/Dashboard' ? 'bg-gray-700 text-white' : ''
+            className={`flex items-center px-6 py-3 text-card-foreground hover:bg-primary hover:text-secondary ${
+              component === 'Admin/Dashboard' ? 'bg-primary text-secondary' : ''
             }`}
           >
             <FaHome className="mr-3" />
             Dashboard
           </Link>
 
-          <div className="px-4 py-2 mt-4 text-xs text-gray-400 uppercase">Content</div>
+          <div className="px-4 py-2 mt-4 text-xs text-muted-foreground uppercase">Content</div>
           <Link
             href={route('admin.blog-posts.index')}
-            className={`flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white ${
-              component.startsWith('Admin/BlogPosts') ? 'bg-gray-700 text-white' : ''
+            className={`flex items-center px-6 py-3 text-card-foreground hover:bg-primary hover:text-secondary ${
+              component.startsWith('Admin/BlogPosts') ? 'bg-primary text-secondary' : ''
             }`}
           >
             <FaNewspaper className="mr-3" />
@@ -63,8 +63,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
           </Link>
           <Link
             href={route('admin.portfolio-projects.index')}
-            className={`flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white ${
-              component.startsWith('Admin/PortfolioProjects') ? 'bg-gray-700 text-white' : ''
+            className={`flex items-center px-6 py-3 text-card-foreground hover:bg-primary hover:text-secondary ${
+              component.startsWith('Admin/PortfolioProjects') ? 'bg-primary text-secondary' : ''
             }`}
           >
             <FaBriefcase className="mr-3" />
@@ -72,8 +72,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
           </Link>
           <Link
             href={route('admin.categories.index')}
-            className={`flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white ${
-              component.startsWith('Admin/Categories') ? 'bg-gray-700 text-white' : ''
+            className={`flex items-center px-6 py-3 text-card-foreground hover:bg-primary hover:text-secondary ${
+              component.startsWith('Admin/Categories') ? 'bg-primary text-secondary' : ''
             }`}
           >
             <FaFolder className="mr-3" />
@@ -81,19 +81,19 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
           </Link>
           <Link
             href={route('admin.tags.index')}
-            className={`flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white ${
-              component.startsWith('Admin/Tags') ? 'bg-gray-700 text-white' : ''
+            className={`flex items-center px-6 py-3 text-card-foreground hover:bg-primary hover:text-secondary ${
+              component.startsWith('Admin/Tags') ? 'bg-primary text-secondary' : ''
             }`}
           >
             <FaTags className="mr-3" />
             Tags
           </Link>
 
-          <div className="px-4 py-2 mt-4 text-xs text-gray-400 uppercase">Account</div>
+          <div className="px-4 py-2 mt-4 text-xs text-muted-foreground uppercase">Account</div>
           <Link
             href={route('profile.edit')}
-            className={`flex items-center px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white ${
-              component === 'Profile/Edit' ? 'bg-gray-700 text-white' : ''
+            className={`flex items-center px-6 py-3 text-card-foreground hover:bg-primary hover:text-secondary ${
+              component === 'Profile/Edit' ? 'bg-primary text-secondary' : ''
             }`}
           >
             <FaUser className="mr-3" />
@@ -103,7 +103,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
             href={route('logout')}
             method="post"
             as="button"
-            className="flex items-center w-full px-6 py-3 text-left text-gray-300 hover:bg-gray-700 hover:text-white"
+            className="flex items-center w-full px-6 py-3 text-left text-card-foreground hover:bg-primary hover:text-secondary"
           >
             <FaSignOutAlt className="mr-3" />
             Logout
@@ -114,9 +114,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
       {/* Main content */}
       <div className="lg:ml-64">
         {/* Header */}
-        <header className="bg-white shadow">
+        <header className="bg-card shadow">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-2xl font-bold text-gray-900">{title || component.split('/').pop()}</h1>
+            <h1 className="title-text text-2xl font-bold text-primary">{title || component.split('/').pop()}</h1>
           </div>
         </header>
 
@@ -126,10 +126,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
         </main>
 
         {/* Footer */}
-        <footer className="bg-white shadow-inner mt-auto">
+        <footer className="bg-card shadow-inner mt-auto">
           <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-            <p className="text-center text-gray-500 text-sm">
-              &copy; {new Date().getFullYear()} Your Portfolio & Blog Admin. All rights reserved.
+            <p className="text-center text-muted-foreground text-sm">
+              &copy; {new Date().getFullYear()} Hexters Admin Panel. All rights reserved.
             </p>
           </div>
         </footer>
@@ -138,7 +138,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-0 lg:hidden"
+          className="fixed inset-0 bg-background bg-opacity-50 z-0 lg:hidden"
           onClick={toggleSidebar}
         ></div>
       )}

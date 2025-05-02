@@ -18,8 +18,8 @@ const FieldsetCheckboxes: React.FC<FieldsetCheckboxesProps> = ({
   items,
   selectedItems = [],
   onSelectionChange,
-  themeColor = "#300A44",
-  textColor = "#524e57",
+  themeColor = "#4ecdc4",
+  textColor = "#ffffff",
   minWidth = 200, // Default minimum width
 }) => {
   const [isHidden, setIsHidden] = useState<boolean>(true);
@@ -159,7 +159,7 @@ const FieldsetCheckboxes: React.FC<FieldsetCheckboxesProps> = ({
         className={`${
           isHidden
             ? "invisible h-0 p-0"
-            : "absolute top-0 z-[3] flex max-h-[335px] flex-col gap-2 overflow-y-auto border-0 border-b bg-white bg-[right_center] p-4 [box-shadow:0_6px_12px_#0000004d] w-full"
+            : "absolute top-0 z-[3] flex max-h-[335px] flex-col gap-2 overflow-y-auto border-0 border-b bg-[#0a2550] bg-[right_center] p-4 [box-shadow:0_6px_12px_#0000004d] w-full"
         }`}
         style={{
           ...(!isHidden ? borderStyle : {}),

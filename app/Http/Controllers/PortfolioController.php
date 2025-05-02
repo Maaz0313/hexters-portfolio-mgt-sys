@@ -11,6 +11,49 @@ use Inertia\Inertia;
 class PortfolioController extends Controller
 {
     /**
+     * Display a single portfolio project.
+     */
+    public function show($slug, Request $request)
+    {
+        $portfolioProject = PortfolioProject::with(['branding', 'industry', 'user', 'images'])
+            ->where('slug', $slug)
+            ->where('is_published', true)
+            ->firstOrFail();
+
+        // Only return JSON if explicitly requested with Accept: application/json header
+        if ($request->wantsJson()) {
+            return response()->json($portfolioProject);
+        }
+
+        // Get related projects based on branding and industry
+        $relatedQuery = PortfolioProject::with(['user'])
+            ->where('id', '!=', $portfolioProject->id)
+            ->where('is_published', true);
+
+        // If the project has a branding, include projects with the same branding
+        if ($portfolioProject->branding_id) {
+            $relatedQuery->where(function ($query) use ($portfolioProject) {
+                $query->where('branding_id', $portfolioProject->branding_id);
+            });
+        }
+
+        // If the project has an industry, include projects with the same industry
+        if ($portfolioProject->industry_id) {
+            $relatedQuery->orWhere('industry_id', $portfolioProject->industry_id);
+        }
+
+        $relatedProjects = $relatedQuery->orderBy('created_at', 'desc')
+            ->limit(3)
+            ->get();
+
+        // Otherwise, render the Inertia view
+        return Inertia::render('PortfolioSingle', [
+            'portfolioProject' => $portfolioProject,
+            'relatedProjects' => $relatedProjects,
+        ]);
+    }
+
+    /**
      * Display a listing of the portfolio projects.
      */
     public function index(Request $request)
@@ -47,20 +90,20 @@ class PortfolioController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhereHas('branding', function($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
-                  })
-                  ->orWhereHas('industry', function($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
-                  });
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('branding', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('industry', function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%");
+                    });
             });
         }
 
         $portfolioProjects = $query->with(['branding', 'industry', 'user'])->get();
 
-        // If this is an AJAX request, return JSON
-        if ($request->ajax() || $request->wantsJson()) {
+        // Only return JSON if explicitly requested with Accept: application/json header
+        if ($request->wantsJson()) {
             return response()->json($portfolioProjects);
         }
 
@@ -81,6 +124,4 @@ class PortfolioController extends Controller
             ],
         ]);
     }
-
-
 }

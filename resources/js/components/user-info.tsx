@@ -13,9 +13,18 @@ export function UserInfo({ user, showEmail = false }: { user: User; showEmail?: 
                     {getInitials(user.name)}
                 </AvatarFallback>
             </Avatar>
-            <div className="grid flex-1 text-left text-sm leading-tight">
+            <div className="grid flex-1 text-left text-sm leading-tight group-hover:text-primary">
                 <span className="truncate font-medium">{user.name}</span>
-                {showEmail && <span className="text-muted-foreground truncate text-xs">{user.email}</span>}
+                {showEmail ? (
+                    <span className="text-muted-foreground truncate text-xs">{user.email}</span>
+                ) : (
+                    <span
+                        className="text-accent truncate text-xs tracking-wide"
+                        style={{ fontFamily: 'var(--font-title)' }}
+                    >
+                        HEXTERS ADMIN
+                    </span>
+                )}
             </div>
         </>
     );

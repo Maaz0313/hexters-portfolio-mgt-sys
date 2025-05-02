@@ -1,0 +1,16 @@
+/* Custom Font Declarations */
+@font-face {
+    font-family: 'Library 3 AM';
+    src: url('/resources/fonts/library-3-am.3am.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Univia Pro';
+    src: url('/resources/fonts/UniviaPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

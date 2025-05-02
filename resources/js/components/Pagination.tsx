@@ -20,7 +20,7 @@ const Pagination = ({ currentPage, totalPages, handlePageChange }: any) => {
       {currentPage > 1 && (
         <>
           <button
-            className="mx-1 cursor-pointer rounded border px-3 py-1 border-[#4716ED] bg-white text-[#4716ED]"
+            className="mx-1 cursor-pointer rounded border px-3 py-1 border-[#4ecdc4] bg-white text-[#0a2550]"
             onClick={() => handlePageChange(1)}
           >
             First

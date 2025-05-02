@@ -51,7 +51,7 @@ class BlogPostController extends Controller
             'category_id' => 'nullable|exists:categories,id',
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
-            'featured_image' => 'nullable|image|max:2048',
+            'featured_image' => 'nullable|image|max:5120', // Increased from 2MB to 5MB
             'is_published' => 'boolean',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
@@ -67,7 +67,7 @@ class BlogPostController extends Controller
         }
 
         // Set user_id and published_at
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = $request->user()->id;
         if ($validated['is_published']) {
             $validated['published_at'] = now();
         }
@@ -126,7 +126,7 @@ class BlogPostController extends Controller
             'category_id' => 'nullable|exists:categories,id',
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
-            'featured_image' => 'nullable|image|max:2048',
+            'featured_image' => 'nullable|image|max:5120', // Increased from 2MB to 5MB
             'is_published' => 'boolean',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',

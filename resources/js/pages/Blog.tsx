@@ -390,11 +390,11 @@ const Blog = ({
     <PortfolioLayout title="Blog">
       <section className="py-16 md:py-20">
         <div className="container flex flex-row justify-between">
-          <h1 className="w-[70%] text-[34px]/[1.03] font-medium text-[#18161a] max-md:w-4/5 md:text-[51px]/[1.04]">
+          <h1 className="w-[70%] text-[34px]/[1.03] font-medium text-[#4ecdc4] max-md:w-4/5 md:text-[51px]/[1.04]">
             Our latest news and insights
           </h1>
           <a
-            className="inline-flex max-h-[55px] items-center gap-3 self-end rounded-[80px] border-2 border-[#4716ED] bg-transparent px-4 py-2 text-base/[1.375] font-medium text-[#4716ED] shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[ease-in-out] hover:bg-[#4716ED] hover:text-white hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)] max-md:mt-6 max-md:self-start"
+            className="inline-flex max-h-[55px] items-center gap-3 self-end rounded-[80px] border-2 border-[#4ecdc4] bg-transparent px-4 py-2 text-base/[1.375] font-medium text-[#4ecdc4] shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[ease-in-out] hover:bg-[#4ecdc4] hover:text-[#0a2550] hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)] max-md:mt-6 max-md:self-start cursor-pointer"
             href="/blogs#all-blogs"
             onClick={scrollToAllBlogs}
           >
@@ -420,19 +420,19 @@ const Blog = ({
       {/* Latest Posts Section */}
       <section className="py-16 md:py-20">
         <div className="container mb-12 flex justify-between max-lg:mb-8 max-lg:flex-col">
-          <h4 className="text-[34px]/[1.03] font-medium text-[#18161a] md:text-[51px]/[1.04]">
+          <h4 className="text-[34px]/[1.03] font-medium text-[#4ecdc4] md:text-[51px]/[1.04]">
             Latest posts
           </h4>
           <div className="inline-flex items-center gap-1 max-lg:mt-6">
             <a
               href="/blogs#all-blogs"
               onClick={scrollToAllBlogs}
-              className="cursor-pointer underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] delay-0 duration-[.4s] ease-[ease] hover:decoration-[#6c45f1] hover:duration-200"
+              className="cursor-pointer text-white underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] delay-0 duration-[.4s] ease-[ease] hover:decoration-[#4ecdc4] hover:duration-200"
             >
               View more
             </a>
             <svg
-              className="size-5 text-[#6c45f1]"
+              className="size-5 text-[#4ecdc4]"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -458,7 +458,7 @@ const Blog = ({
       {topCategories.map((categoryName, index) => (
         <section key={index} className="py-16 md:py-20">
           <div className="container mb-12 flex justify-between max-lg:mb-8 max-lg:flex-col">
-            <h4 className="text-[34px]/[1.03] font-medium text-[#18161a] md:text-[51px]/[1.04]">
+            <h4 className="text-[34px]/[1.03] font-medium text-[#4ecdc4] md:text-[51px]/[1.04]">
               {categoryName}
             </h4>
             <div className="inline-flex items-center gap-1 max-lg:mt-6">
@@ -476,12 +476,12 @@ const Blog = ({
                     preserveScroll: true
                   });
                 }}
-                className="cursor-pointer underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] delay-0 duration-[.4s] ease-[ease] hover:decoration-[#6c45f1] hover:duration-200"
+                className="cursor-pointer text-white underline decoration-transparent decoration-2 underline-offset-4 transition-[text-decoration-color] delay-0 duration-[.4s] ease-[ease] hover:decoration-[#4ecdc4] hover:duration-200"
               >
                 View more
               </a>
               <svg
-                className="size-5 text-[#6c45f1]"
+                className="size-5 text-[#4ecdc4]"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -508,17 +508,17 @@ const Blog = ({
       <section ref={allBlogsRef} id="all-blogs" className="py-16 md:py-20">
         <div className="container mx-auto w-full max-w-[1220px] px-6 py-0">
           <div className="mb-48 text-center">
-            <h2 className="m-0 text-[1.8571428571rem] leading-[1.08] font-normal text-[#18161a] md:text-[2.6428571429rem]">
+            <h2 className="m-0 text-[1.8571428571rem] leading-[1.08] font-normal text-[#4ecdc4] md:text-[2.6428571429rem]">
               All Blog Posts
             </h2>
-            <p className="text-[1.1428571429rem]/[1.5] font-light text-[#18161a] md:text-2xl/[1.375]">
+            <p className="text-[1.1428571429rem]/[1.5] font-light text-white md:text-2xl/[1.375]">
               News and insights from our team.
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-8 mb-4 md:m-0 md:mx-auto md:mb-14">
             <div className="w-full md:w-auto">
               <input
-                className={`search h-12 w-full border-0 border-b border-[#300A44] bg-[right_center] py-4 pr-8 pl-4 ring-0 focus:outline-0 focus:border-[#4716ed]`}
+                className={`search h-12 w-full border-0 border-b border-[#4ecdc4] bg-[right_center] py-4 pr-8 pl-4 text-white placeholder:text-white ring-0 focus:outline-0 focus:border-[#4ecdc4]`}
                 type="text"
                 name="search"
                 id="search"
@@ -547,7 +547,7 @@ const Blog = ({
               disabled={!searchTerm && selectedCategories.length === 0 && selectedTags.length === 0 && !selectedAuthor}
             >
               <svg
-                className="text-[#300a44] [transition:color_.4s_ease] group-disabled:text-[#6d6873] group-disabled:[transition:color_.2s_ease]"
+                className="text-[#4ecdc4] [transition:color_.4s_ease] group-disabled:text-[#6d6873] group-disabled:[transition:color_.2s_ease]"
                 xmlns="http://www.w3.org/2000/svg"
                 enableBackground="new 0 0 24 24"
                 height="24px"
@@ -583,7 +583,7 @@ const Blog = ({
               {(searchTerm || selectedCategories.length > 0 || selectedTags.length > 0 || selectedAuthor) && (
                 <button
                   onClick={handleReset}
-                  className="mt-4 px-4 py-2 bg-[#4716ED] text-white rounded-md hover:bg-[#3a11c5] transition-colors cursor-pointer"
+                  className="mt-4 px-4 py-2 bg-[#4ecdc4] text-[#0a2550] rounded-md hover:bg-[#0a2550] hover:text-[#4ecdc4] transition-colors cursor-pointer"
                 >
                   Clear All Filters
                 </button>

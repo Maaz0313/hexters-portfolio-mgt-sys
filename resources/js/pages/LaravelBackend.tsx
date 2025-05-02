@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLaravel, FaServer, FaShieldAlt, FaRocket, FaCode } from "react-icons/fa";
+import PortfolioLayout from "@/layouts/portfolio-layout";
 
 const LaravelBackend = () => {
   // Animation variants
@@ -46,12 +47,12 @@ const LaravelBackend = () => {
   ];
 
   return (
-    <>
+    <PortfolioLayout title="Laravel Backend Development">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#300a44] to-[#4716ed] py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary to-accent py-28">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-center md:flex-row md:justify-between md:gap-12">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -65,14 +66,22 @@ const LaravelBackend = () => {
               </p>
               <motion.a
                 href="/contact"
-                className="inline-flex items-center justify-center w-fit h-[56px] px-8 rounded-[80px] border-none bg-white text-[#4716ed] font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-[#ffd400] hover:text-[#300a44] hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center justify-center w-fit h-[56px] px-8 rounded-[80px] border-none shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
+              style={{
+                backgroundColor: "#1e3a6d",
+                color: "white"
+              }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "white",
+                color: "#0a2550"
+              }}
                 whileTap={{ scale: 0.95 }}
               >
                 Get a Quote
               </motion.a>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -81,8 +90,8 @@ const LaravelBackend = () => {
             >
               <div className="relative mx-auto max-w-lg">
                 <div className="absolute inset-0 animate-pulse rounded-2xl bg-white/20"></div>
-                <div className="relative z-10 overflow-hidden rounded-2xl bg-gradient-to-br from-[#4716ed]/80 to-[#300a44]/80 p-1">
-                  <div className="flex items-center justify-center rounded-xl bg-[#300a44] p-8">
+                <div className="relative z-10 overflow-hidden rounded-2xl bg-gradient-to-br from-accent/80 to-primary/80 p-1">
+                  <div className="flex items-center justify-center rounded-xl bg-primary p-8">
                     <FaLaravel className="text-9xl text-white" />
                   </div>
                 </div>
@@ -90,7 +99,7 @@ const LaravelBackend = () => {
             </motion.div>
           </div>
         </div>
-        
+
         {/* Decorative elements */}
         <motion.div
           className="absolute top-20 right-20 h-32 w-32 rounded-full bg-white/5"
@@ -98,21 +107,21 @@ const LaravelBackend = () => {
           transition={{ repeat: Infinity, duration: 4 }}
         />
         <motion.div
-          className="absolute bottom-10 left-10 h-24 w-24 rounded-full bg-[#4716ed]/20"
+          className="absolute bottom-10 left-10 h-24 w-24 rounded-full bg-accent/20"
           animate={{ y: [0, -15, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         />
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-[#300a44]/10 to-[#4716ed]/15 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-primary/10 to-accent/15 relative overflow-hidden">
         {/* Decorative background elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-10 h-64 w-64 rounded-full bg-[#4716ed]/20 blur-3xl"></div>
-          <div className="absolute bottom-40 left-20 h-72 w-72 rounded-full bg-[#300a44]/20 blur-3xl"></div>
+          <div className="absolute top-20 right-10 h-64 w-64 rounded-full bg-accent/20 blur-3xl"></div>
+          <div className="absolute bottom-40 left-20 h-72 w-72 rounded-full bg-primary/20 blur-3xl"></div>
           <div className="absolute top-1/2 left-1/3 h-48 w-48 rounded-full bg-[#ffd400]/10 blur-3xl"></div>
         </div>
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -121,10 +130,10 @@ const LaravelBackend = () => {
             viewport={{ once: true }}
             className="mb-16 text-center"
           >
-            <h2 className="mb-6 text-4xl font-bold text-[#300a44]">
+            <h2 className="mb-6 text-4xl font-bold text-primary">
               Why Choose Laravel for Your Backend
             </h2>
-            <p className="mx-auto max-w-2xl text-xl/relaxed text-[#18161a]/80">
+            <p className="mx-auto max-w-2xl text-xl/relaxed text-foreground/80">
               Laravel provides a robust foundation for your web applications with elegant syntax and powerful features
             </p>
           </motion.div>
@@ -140,15 +149,15 @@ const LaravelBackend = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="group rounded-xl bg-gradient-to-br from-white/80 to-purple-50/90 backdrop-blur-md p-8 border-l-4 border-[#4716ed] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:bg-gradient-to-br hover:from-white hover:to-[#4716ed]/20"
+                className="group rounded-xl bg-gradient-to-br from-white/80 to-purple-50/90 backdrop-blur-md p-8 border-l-4 border-accent shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:bg-gradient-to-br hover:from-white hover:to-accent/20"
               >
-                <div className="mb-6 text-4xl text-[#4716ed] group-hover:text-[#300a44] transition-colors duration-300">
+                <div className="mb-6 text-4xl text-accent group-hover:text-primary transition-colors duration-300">
                   {feature.icon}
                 </div>
-                <h3 className="mb-4 text-xl font-semibold text-[#300a44]">
+                <h3 className="mb-4 text-xl font-semibold text-primary">
                   {feature.title}
                 </h3>
-                <p className="text-[#18161a]/80">
+                <p className="text-foreground/80">
                   {feature.description}
                 </p>
               </motion.div>
@@ -158,10 +167,10 @@ const LaravelBackend = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gradient-to-br from-[#300a44]/5 to-[#4716ed]/5 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute top-10 right-10 h-64 w-64 rounded-full bg-[#4716ed]/30 animate-pulse"></div>
-          <div className="absolute bottom-20 left-20 h-48 w-48 rounded-full bg-[#300a44]/30 animate-pulse"></div>
+          <div className="absolute top-10 right-10 h-64 w-64 rounded-full bg-accent/30 animate-pulse"></div>
+          <div className="absolute bottom-20 left-20 h-48 w-48 rounded-full bg-primary/30 animate-pulse"></div>
         </div>
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -171,10 +180,10 @@ const LaravelBackend = () => {
             viewport={{ once: true }}
             className="mb-16 text-center"
           >
-            <h2 className="mb-6 text-4xl font-bold text-[#300a44]">
+            <h2 className="mb-6 text-4xl font-bold text-primary">
               Our Development Process
             </h2>
-            <p className="mx-auto max-w-2xl text-xl/relaxed text-[#18161a]/80">
+            <p className="mx-auto max-w-2xl text-xl/relaxed text-foreground/80">
               We follow a structured approach to deliver high-quality Laravel backend solutions
             </p>
           </motion.div>
@@ -187,8 +196,8 @@ const LaravelBackend = () => {
             className="relative mx-auto max-w-4xl"
           >
             {/* Timeline line */}
-            <div className="absolute left-[15px] top-0 h-full w-[2px] bg-[#4716ed]/30 md:left-1/2 md:-ml-[1px]"></div>
-            
+            <div className="absolute left-[15px] top-0 h-full w-[2px] bg-accent/30 md:left-1/2 md:-ml-[1px]"></div>
+
             {/* Timeline items */}
             {[
               {
@@ -215,17 +224,17 @@ const LaravelBackend = () => {
               >
                 <div className="flex-grow md:w-1/2">
                   <div className={`relative rounded-xl bg-white p-6 shadow-lg ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}`}>
-                    <h3 className="mb-3 text-xl font-semibold text-[#300a44]">
+                    <h3 className="mb-3 text-xl font-semibold text-primary">
                       {step.title}
                     </h3>
-                    <p className="text-[#18161a]/80">
+                    <p className="text-foreground/80">
                       {step.description}
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Timeline dot */}
-                <div className="absolute left-0 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-[#4716ed] text-white md:left-1/2 md:-ml-4">
+                <div className="absolute left-0 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white md:left-1/2 md:-ml-4">
                   {index + 1}
                 </div>
               </motion.div>
@@ -235,7 +244,7 @@ const LaravelBackend = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#4716ed]">
+      <section className="py-20 bg-accent">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -252,8 +261,16 @@ const LaravelBackend = () => {
             </p>
             <motion.a
               href="/contact"
-              className="inline-flex items-center justify-center w-fit h-[56px] px-8 rounded-[80px] border-none bg-white text-[#4716ed] font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-[#300a44] hover:text-white hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center justify-center w-fit h-[56px] px-8 rounded-[80px] border-none shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
+              style={{
+                backgroundColor: "#1e3a6d",
+                color: "white"
+              }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "white",
+                color: "#0a2550"
+              }}
               whileTap={{ scale: 0.95 }}
             >
               Get in Touch
@@ -261,7 +278,7 @@ const LaravelBackend = () => {
           </motion.div>
         </div>
       </section>
-    </>
+    </PortfolioLayout>
   );
 };
 

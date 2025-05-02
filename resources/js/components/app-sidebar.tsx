@@ -1,11 +1,9 @@
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, FileText, Briefcase, Tag, FolderTree, Palette, Building2 } from 'lucide-react';
-import AppLogo from './app-logo';
+import { Briefcase, Building2, File, FileText, FolderTree, LayoutGrid, Palette, Shield, Tag, Users } from 'lucide-react';
+import AdminLogoLink from './admin-logo-link';
 
 const mainNavItems: NavItem[] = [
     {
@@ -43,18 +41,20 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard/industries',
         icon: Building2,
     },
-];
-
-const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Pages',
+        href: '/dashboard/pages',
+        icon: File,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
+        title: 'Users',
+        href: '/dashboard/users',
+        icon: Users,
+    },
+    {
+        title: 'Roles',
+        href: '/dashboard/roles',
+        icon: Shield,
     },
 ];
 
@@ -62,15 +62,7 @@ export function AppSidebar() {
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
-                                <AppLogo />
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </SidebarMenu>
+                <AdminLogoLink />
             </SidebarHeader>
 
             <SidebarContent>
@@ -78,7 +70,6 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

@@ -1,0 +1,179 @@
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import AppLayout from '@/layouts/app-layout';
+import { type BreadcrumbItem } from '@/types';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Save, X } from 'lucide-react';
+import { FormEvent } from 'react';
+
+interface Role {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+}
+
+interface Props {
+    roles: Role[];
+}
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+    {
+        title: 'Users',
+        href: '/dashboard/users',
+    },
+    {
+        title: 'Create',
+        href: '/dashboard/users/create',
+    },
+];
+
+const Create = ({ roles }: Props) => {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        roles: [] as number[],
+        is_admin: false,
+    });
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        post(route('admin.users.store'), {
+            onSuccess: () => reset(),
+        });
+    };
+
+    const handleRoleChange = (roleId: number, checked: boolean) => {
+        if (checked) {
+            setData('roles', [...data.roles, roleId]);
+        } else {
+            setData(
+                'roles',
+                data.roles.filter((id) => id !== roleId),
+            );
+        }
+    };
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="Create User" />
+
+            <div className="mb-6 flex items-center justify-between">
+                <h1 className="text-2xl font-semibold">Create User</h1>
+                <div className="flex space-x-2">
+                    <Button variant="outline" asChild>
+                        <Link href={route('admin.users.index')}>
+                            <X className="mr-2 h-4 w-4" />
+                            Cancel
+                        </Link>
+                    </Button>
+                    <Button type="submit" form="userForm">
+                        <Save className="mr-2 h-4 w-4" />
+                        Save
+                    </Button>
+                </div>
+            </div>
+
+            <div className="bg-card overflow-hidden rounded-lg shadow-sm">
+                <form id="userForm" onSubmit={handleSubmit} className="p-6">
+                    <div className="grid grid-cols-1 gap-6">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div className="space-y-2">
+                                <Label htmlFor="name">
+                                    Name <span className="text-accent">*</span>
+                                </Label>
+                                <Input id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} required />
+                                {errors.name && <p className="text-destructive text-sm">{errors.name}</p>}
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="email">
+                                    Email <span className="text-accent">*</span>
+                                </Label>
+                                <Input id="email" type="email" value={data.email} onChange={(e) => setData('email', e.target.value)} required />
+                                {errors.email && <p className="text-destructive text-sm">{errors.email}</p>}
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div className="space-y-2">
+                                <Label htmlFor="password">
+                                    Password <span className="text-accent">*</span>
+                                </Label>
+                                <Input
+                                    id="password"
+                                    type="password"
+                                    value={data.password}
+                                    onChange={(e) => setData('password', e.target.value)}
+                                    required
+                                />
+                                {errors.password && <p className="text-destructive text-sm">{errors.password}</p>}
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="password_confirmation">
+                                    Confirm Password <span className="text-accent">*</span>
+                                </Label>
+                                <Input
+                                    id="password_confirmation"
+                                    type="password"
+                                    value={data.password_confirmation}
+                                    onChange={(e) => setData('password_confirmation', e.target.value)}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-4">
+                            <Label>Roles</Label>
+                            <div className="border-border rounded-md border p-4">
+                                <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+                                    {roles.map((role) => (
+                                        <div key={role.id} className="flex items-center space-x-2">
+                                            <Checkbox
+                                                id={`role-${role.id}`}
+                                                checked={data.roles.includes(role.id)}
+                                                onCheckedChange={(checked) => handleRoleChange(role.id, checked as boolean)}
+                                            />
+                                            <Label htmlFor={`role-${role.id}`} className="cursor-pointer">
+                                                {role.name}
+                                            </Label>
+                                        </div>
+                                    ))}
+                                </div>
+                                {errors.roles && <p className="text-destructive mt-2 text-sm">{errors.roles}</p>}
+                            </div>
+                        </div>
+
+                        <div className="border-border rounded-md border p-4">
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="is_admin"
+                                    checked={data.is_admin}
+                                    onCheckedChange={(checked) => setData('is_admin', checked as boolean)}
+                                />
+                                <Label htmlFor="is_admin" className="cursor-pointer font-medium">
+                                    Administrator Access
+                                </Label>
+                            </div>
+                            <p className="text-muted-foreground mt-2 pl-6 text-sm">
+                                Administrators have full access to all features regardless of assigned roles.
+                            </p>
+                            {errors.is_admin && <p className="text-destructive mt-2 text-sm">{errors.is_admin}</p>}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </AppLayout>
+    );
+};
+
+export default Create;

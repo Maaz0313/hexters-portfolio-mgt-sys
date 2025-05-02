@@ -105,14 +105,14 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
       <Head title={`Edit Blog Post: ${blogPost.title}`} />
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div className="p-6 bg-white border-b border-gray-200">
+          <div className="bg-card overflow-hidden shadow-sm sm:rounded-lg">
+            <div className="p-6 bg-card border-b border-border">
               <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Edit Blog Post</h1>
+                <h1 className="title-text text-2xl font-bold text-primary">Edit Blog Post</h1>
                 <div className="flex space-x-2">
                   <Link
                     href={route('admin.blog-posts.index')}
-                    className="inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-400 active:bg-gray-500 focus:outline-none focus:border-gray-500 focus:ring ring-gray-300 disabled:opacity-25 transition"
+                    className="inline-flex items-center px-4 py-2 bg-muted border border-transparent rounded-md font-semibold text-xs text-muted-foreground uppercase tracking-widest hover:bg-muted/80 focus:outline-none focus:ring ring-muted disabled:opacity-25 transition cursor-pointer"
                   >
                     <X className="mr-2 h-4 w-4" />
                     Cancel
@@ -120,7 +120,7 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                   <Link
                     href={route('blog.show', blogPost.slug)}
                     target="_blank"
-                    className="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-800 focus:outline-none focus:border-green-800 focus:ring ring-green-300 disabled:opacity-25 transition"
+                    className="inline-flex items-center px-4 py-2 bg-accent border border-transparent rounded-md font-semibold text-xs text-accent-foreground uppercase tracking-widest hover:bg-accent/80 focus:outline-none focus:ring ring-accent disabled:opacity-25 transition cursor-pointer"
                   >
                     <FileText className="mr-2 h-4 w-4" />
                     View
@@ -133,25 +133,25 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                   <div className="md:col-span-2 space-y-6">
                     {/* Title */}
                     <div>
-                      <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                        Title <span className="text-red-500">*</span>
+                      <label htmlFor="title" className="block text-sm font-medium text-card-foreground">
+                        Title <span className="text-destructive">*</span>
                       </label>
                       <input
                         type="text"
                         id="title"
                         value={data.title}
                         onChange={(e) => setData('title', e.target.value)}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="mt-1 block w-full rounded-md border-border bg-background text-card-foreground shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                         required
                       />
                       {errors.title && (
-                        <p className="mt-1 text-sm text-red-600">{errors.title}</p>
+                        <p className="mt-1 text-sm text-destructive">{errors.title}</p>
                       )}
                     </div>
 
                     {/* Excerpt */}
                     <div>
-                      <label htmlFor="excerpt" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="excerpt" className="block text-sm font-medium text-card-foreground">
                         Excerpt
                       </label>
                       <textarea
@@ -159,28 +159,28 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                         value={data.excerpt}
                         onChange={(e) => setData('excerpt', e.target.value)}
                         rows={3}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="mt-1 block w-full rounded-md border-border bg-background text-card-foreground shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                       />
                       {errors.excerpt && (
-                        <p className="mt-1 text-sm text-red-600">{errors.excerpt}</p>
+                        <p className="mt-1 text-sm text-destructive">{errors.excerpt}</p>
                       )}
                     </div>
 
                     {/* Content */}
                     <div>
-                      <label htmlFor="content" className="block text-sm font-medium text-gray-700">
-                        Content <span className="text-red-500">*</span>
+                      <label htmlFor="content" className="block text-sm font-medium text-card-foreground">
+                        Content <span className="text-destructive">*</span>
                       </label>
                       <textarea
                         id="content"
                         value={data.content}
                         onChange={(e) => setData('content', e.target.value)}
                         rows={15}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="mt-1 block w-full rounded-md border-border bg-background text-card-foreground shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                         required
                       />
                       {errors.content && (
-                        <p className="mt-1 text-sm text-red-600">{errors.content}</p>
+                        <p className="mt-1 text-sm text-destructive">{errors.content}</p>
                       )}
                     </div>
                   </div>
@@ -188,7 +188,7 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                   <div className="space-y-6">
                     {/* Featured Image */}
                     <div>
-                      <label htmlFor="featured_image" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="featured_image" className="block text-sm font-medium text-card-foreground">
                         Featured Image
                       </label>
                       <div className="mt-1 flex items-center">
@@ -201,7 +201,7 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                         />
                         <label
                           htmlFor="featured_image"
-                          className="cursor-pointer inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition"
+                          className="cursor-pointer inline-flex items-center px-4 py-2 bg-background border border-border rounded-md font-semibold text-xs text-card-foreground uppercase tracking-widest shadow-sm hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-25 transition"
                         >
                           {blogPost.featured_image ? 'Change Image' : 'Select Image'}
                         </label>
@@ -216,20 +216,20 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                         </div>
                       )}
                       {errors.featured_image && (
-                        <p className="mt-1 text-sm text-red-600">{errors.featured_image}</p>
+                        <p className="mt-1 text-sm text-destructive">{errors.featured_image}</p>
                       )}
                     </div>
 
                     {/* Category */}
                     <div>
-                      <label htmlFor="category_id" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="category_id" className="block text-sm font-medium text-card-foreground">
                         Category
                       </label>
                       <select
                         id="category_id"
                         value={data.category_id}
                         onChange={(e) => setData('category_id', e.target.value)}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="mt-1 block w-full rounded-md border-border bg-background text-card-foreground shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                       >
                         <option value="">Select a category</option>
                         {categories.map((category) => (
@@ -239,16 +239,16 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                         ))}
                       </select>
                       {errors.category_id && (
-                        <p className="mt-1 text-sm text-red-600">{errors.category_id}</p>
+                        <p className="mt-1 text-sm text-destructive">{errors.category_id}</p>
                       )}
                     </div>
 
                     {/* Tags */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-card-foreground mb-2">
                         Tags
                       </label>
-                      <div className="space-y-2 max-h-60 overflow-y-auto border border-gray-300 rounded-md p-2">
+                      <div className="space-y-2 max-h-60 overflow-y-auto border border-border bg-background rounded-md p-2">
                         {tags.map((tag) => (
                           <div key={tag.id} className="flex items-center">
                             <input
@@ -256,19 +256,19 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                               id={`tag-${tag.id}`}
                               checked={data.tags.includes(tag.id)}
                               onChange={() => handleTagChange(tag.id)}
-                              className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                              className="rounded border-border text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                             />
-                            <label htmlFor={`tag-${tag.id}`} className="ml-2 text-sm text-gray-700">
+                            <label htmlFor={`tag-${tag.id}`} className="ml-2 text-sm text-card-foreground">
                               {tag.name}
                             </label>
                           </div>
                         ))}
                         {tags.length === 0 && (
-                          <p className="text-sm text-gray-500">No tags available</p>
+                          <p className="text-sm text-muted-foreground">No tags available</p>
                         )}
                       </div>
                       {errors.tags && (
-                        <p className="mt-1 text-sm text-red-600">{errors.tags}</p>
+                        <p className="mt-1 text-sm text-destructive">{errors.tags}</p>
                       )}
                     </div>
 
@@ -279,9 +279,9 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                         id="is_published"
                         checked={data.is_published}
                         onChange={(e) => setData('is_published', e.target.checked)}
-                        className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        className="rounded border-border text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
                       />
-                      <label htmlFor="is_published" className="ml-2 text-sm text-gray-700">
+                      <label htmlFor="is_published" className="ml-2 text-sm text-card-foreground">
                         {blogPost.is_published ? 'Published' : 'Publish'}
                       </label>
                     </div>
@@ -291,7 +291,7 @@ const Edit = ({ blogPost, categories, tags, selectedTags }: Props) => {
                       <button
                         type="submit"
                         disabled={processing}
-                        className="w-full inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:border-blue-800 focus:ring ring-blue-300 disabled:opacity-25 transition"
+                        className="w-full inline-flex justify-center items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-xs text-primary-foreground uppercase tracking-widest hover:bg-primary/90 focus:outline-none focus:ring ring-primary disabled:opacity-25 transition cursor-pointer"
                       >
                         <Save className="mr-2 h-4 w-4" />
                         {processing ? 'Saving...' : 'Update Blog Post'}

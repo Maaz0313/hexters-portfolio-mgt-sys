@@ -13,7 +13,6 @@ import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import AppLogo from './app-logo';
-import AppLogoIcon from './app-logo-icon';
 
 const mainNavItems: NavItem[] = [
     {
@@ -60,8 +59,20 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                             </SheetTrigger>
                             <SheetContent side="left" className="bg-sidebar flex h-full w-64 flex-col items-stretch justify-between">
                                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                                <SheetHeader className="flex justify-start text-left">
-                                    <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
+                                <SheetHeader className="flex justify-start text-left p-4">
+                                    <div className="flex items-center gap-2">
+                                        <img
+                                            src="/images/logos/logo white.png"
+                                            alt="Hexters Logo Icon"
+                                            className="h-7 w-auto"
+                                        />
+                                        <span
+                                            className="font-title text-2xl text-primary tracking-wide"
+                                            style={{ fontFamily: 'var(--font-title)' }}
+                                        >
+                                            HEXTERS
+                                        </span>
+                                    </div>
                                 </SheetHeader>
                                 <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                     <div className="flex h-full flex-col justify-between text-sm">

@@ -1,0 +1,34 @@
+/* Responsive Table Styles */
+.responsive-table-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.responsive-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.responsive-table {
+    min-width: 100%;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Add shadow indicator when table can be scrolled horizontally */
+@media (max-width: 768px) {
+    .responsive-table-wrapper {
+        /* Add horizontal scroll indicator */
+        background-image: linear-gradient(to right, var(--color-card) 30%, rgba(255, 255, 255, 0)),
+                         linear-gradient(to right, rgba(255, 255, 255, 0), var(--color-card) 70%);
+        background-position: 0 0, 100% 0;
+        background-repeat: no-repeat;
+        background-size: 20px 100%, 20px 100%;
+        background-attachment: local, local;
+    }
+}

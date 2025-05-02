@@ -1,113 +1,92 @@
-import React, { FormEvent } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { Save, X } from 'lucide-react';
-
-// No props needed
+import React, { FormEvent } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Dashboard',
-    href: '/dashboard',
-  },
-  {
-    title: 'Brandings',
-    href: '/dashboard/brandings',
-  },
-  {
-    title: 'Create',
-    href: '/dashboard/brandings/create',
-  },
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+    {
+        title: 'Brandings',
+        href: '/dashboard/brandings',
+    },
+    {
+        title: 'Create',
+        href: '/dashboard/brandings/create',
+    },
 ];
 
 const Create = () => {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
-    description: '',
-  });
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    post(route('admin.brandings.store'), {
-      onSuccess: () => reset(),
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        description: '',
     });
-  };
 
-  return (
-    <AppLayout breadcrumbs={breadcrumbs}>
-      <Head title="Create Branding" />
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div className="p-6 bg-white border-b border-gray-200">
-              <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Create Branding</h1>
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        post(route('admin.brandings.store'), {
+            onSuccess: () => reset(),
+        });
+    };
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="Create Branding" />
+            
+            <div className="flex items-center justify-between mb-6">
+                <h1 className="text-2xl font-semibold">Create Branding</h1>
                 <div className="flex space-x-2">
-                  <Link
-                    href={route('admin.brandings.index')}
-                    className="inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-400 active:bg-gray-500 focus:outline-none focus:border-gray-500 focus:ring ring-gray-300 disabled:opacity-25 transition"
-                  >
-                    <X className="mr-2 h-4 w-4" />
-                    Cancel
-                  </Link>
+                    <Button variant="outline" asChild>
+                        <Link href={route('admin.brandings.index')}>
+                            <X className="w-4 h-4 mr-2" />
+                            Cancel
+                        </Link>
+                    </Button>
+                    <Button type="submit" form="brandingForm">
+                        <Save className="w-4 h-4 mr-2" />
+                        Save
+                    </Button>
                 </div>
-              </div>
-
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 gap-6">
-                  {/* Name */}
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                      Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={data.name}
-                      onChange={(e) => setData('name', e.target.value)}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                      required
-                    />
-                    {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
-                  </div>
-
-                  {/* Description */}
-                  <div>
-                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                      Description
-                    </label>
-                    <textarea
-                      id="description"
-                      value={data.description}
-                      onChange={(e) => setData('description', e.target.value)}
-                      rows={4}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    />
-                    {errors.description && (
-                      <p className="mt-1 text-sm text-red-600">{errors.description}</p>
-                    )}
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="mt-6">
-                    <button
-                      type="submit"
-                      disabled={processing}
-                      className="w-full inline-flex justify-center items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:border-blue-800 focus:ring ring-blue-300 disabled:opacity-25 transition"
-                    >
-                      <Save className="mr-2 h-4 w-4" />
-                      {processing ? 'Saving...' : 'Save Branding'}
-                    </button>
-                  </div>
-                </div>
-              </form>
             </div>
-          </div>
-        </div>
-      </div>
-    </AppLayout>
-  );
+
+            <div className="bg-card shadow-sm rounded-lg overflow-hidden">
+                <form id="brandingForm" onSubmit={handleSubmit} className="p-6">
+                    <div className="grid grid-cols-1 gap-6">
+                        <div className="space-y-2">
+                            <Label htmlFor="name">Name <span className="text-accent">*</span></Label>
+                            <Input
+                                id="name"
+                                type="text"
+                                value={data.name}
+                                onChange={(e) => setData('name', e.target.value)}
+                                required
+                            />
+                            {errors.name && <p className="text-destructive text-sm">{errors.name}</p>}
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="description">Description</Label>
+                            <Textarea
+                                id="description"
+                                value={data.description}
+                                onChange={(e) => setData('description', e.target.value)}
+                                rows={3}
+                                placeholder="Provide a description for this branding"
+                            />
+                            {errors.description && <p className="text-destructive text-sm">{errors.description}</p>}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </AppLayout>
+    );
 };
 
 export default Create;

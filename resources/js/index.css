@@ -101,7 +101,7 @@
         appearance: button;
     }
     .btn-white {
-        @apply rounded-[80px] border-none bg-white px-6 py-4 text-sm/[1.375] font-medium text-[#4716ed] shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[ease-in-out] focus:hover:bg-[#4716ed] focus:hover:text-white focus:hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)] md:text-base/normal;
+        @apply rounded-[80px] border-none bg-white px-6 py-4 text-sm/[1.375] font-medium text-[#0a2550] shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 ease-[ease-in-out] hover:bg-[#4ecdc4] hover:text-white focus:hover:bg-[#4ecdc4] focus:hover:text-white focus:hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)] md:text-base/normal;
     }
     a {
         color: inherit;
@@ -126,11 +126,11 @@
 }
 
 .cta-btn {
-    @apply rounded-[80px] border-none bg-[#300a44] px-6 py-4 font-medium text-white [box-shadow:0_6px_12px_#0000004d,0_1px_2px_#0000004d] transition-all duration-300 hover:bg-white hover:text-[#1b0328] hover:[box-shadow:0_10px_24px_#0000004d,0_6px_12px_#0000004d] md:text-base lg:flex lg:items-center lg:justify-center;
+    @apply rounded-[80px] border-none bg-[#0a2550] px-6 py-4 font-medium text-white [box-shadow:0_6px_12px_#0000004d,0_1px_2px_#0000004d] transition-all duration-300 hover:bg-[#4ecdc4] hover:text-[#0a2550] hover:[box-shadow:0_10px_24px_#0000004d,0_6px_12px_#0000004d] md:text-base lg:flex lg:items-center lg:justify-center;
 }
 
 .dropdown {
-    @apply invisible absolute top-full left-[371.6px] z-4 hidden w-fit bg-white opacity-0 [box-shadow:0_1px_8px_#0000001a] [transition:all_.4s_ease];
+    @apply invisible absolute top-full left-[371.6px] z-4 hidden w-fit bg-[color:var(--color-background)] opacity-0 [box-shadow:0_1px_8px_#0000001a] [transition:all_.4s_ease];
 }
 .active {
     @apply visible block opacity-1;
@@ -161,23 +161,23 @@
 .bg-ferozi-gradient {
     background: linear-gradient(
         90deg,
-        #300a44,
-        #300b44,
-        #2e0e45,
-        #2c1446,
-        #291b48,
-        #25244a,
-        #212d4d,
-        #1d384f,
-        #184452,
-        #134f55,
-        #0f5a57,
-        #0b635a,
-        #076c5c,
-        #04735e,
-        #02795f,
-        #007c60,
-        #007d60
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-primary),
+        var(--color-accent),
+        var(--color-accent),
+        var(--color-accent),
+        var(--color-accent),
+        var(--color-accent),
+        var(--color-accent),
+        var(--color-accent)
     );
 }
 
