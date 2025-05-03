@@ -13,7 +13,7 @@ class BlogController extends Controller
     /**
      * Display a listing of the blog posts.
      */
-    public function index(Request $request)
+    public function index(Request $request, $slug = null)
     {
         $query = BlogPost::with(['category', 'tags', 'user'])
             ->where('is_published', true)
@@ -28,8 +28,17 @@ class BlogController extends Controller
             }
         }
 
-        // Filter by tag
-        if ($request->has('tag')) {
+        // Filter by tag from route parameter (for blog.tag route)
+        if ($slug) {
+            $tag = Tag::where('slug', $slug)->first();
+            if ($tag) {
+                $query->whereHas('tags', function ($q) use ($tag) {
+                    $q->where('tags.id', $tag->id);
+                });
+            }
+        }
+        // Filter by tag from request parameter
+        elseif ($request->has('tag')) {
             $tag = Tag::where('slug', $request->tag)->first();
             if ($tag) {
                 $query->whereHas('tags', function ($q) use ($tag) {
@@ -43,15 +52,15 @@ class BlogController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('excerpt', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%");
+                    ->orWhere('excerpt', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
             });
         }
 
         $blogPosts = $query->paginate(10);
 
-        // If this is an AJAX request, return JSON
-        if ($request->ajax() || $request->wantsJson()) {
+        // Only return JSON for explicit AJAX requests that are not Inertia requests
+        if (($request->ajax() || $request->wantsJson() || $request->expectsJson()) && !$request->header('X-Inertia')) {
             return response()->json($blogPosts);
         }
 
@@ -86,7 +95,7 @@ class BlogController extends Controller
             'filters' => [
                 'search' => $request->input('search', ''),
                 'category' => $request->input('category', ''),
-                'tag' => $request->input('tag', ''),
+                'tag' => $slug ?? $request->input('tag', ''),
             ],
         ]);
     }
@@ -102,8 +111,8 @@ class BlogController extends Controller
             ->whereNotNull('published_at')
             ->firstOrFail();
 
-        // If this is an AJAX request, return JSON
-        if ($request->ajax() || $request->wantsJson()) {
+        // Only return JSON for explicit AJAX requests that are not Inertia requests
+        if (($request->ajax() || $request->wantsJson()) && !$request->header('X-Inertia')) {
             return response()->json($blogPost);
         }
 
@@ -176,8 +185,8 @@ class BlogController extends Controller
             ->limit(3)
             ->get();
 
-        // If this is an AJAX request, return JSON
-        if ($request->ajax() || $request->wantsJson()) {
+        // Only return JSON for explicit AJAX requests that are not Inertia requests
+        if (($request->ajax() || $request->wantsJson()) && !$request->header('X-Inertia')) {
             return response()->json($relatedPosts);
         }
 

@@ -24,6 +24,7 @@ class BlogPost extends Model
         'excerpt',
         'content',
         'featured_image',
+        'thumbnail_image',
         'is_published',
         'published_at',
     ];

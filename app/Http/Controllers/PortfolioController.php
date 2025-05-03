@@ -20,8 +20,8 @@ class PortfolioController extends Controller
             ->where('is_published', true)
             ->firstOrFail();
 
-        // Only return JSON if explicitly requested with Accept: application/json header
-        if ($request->wantsJson()) {
+        // Only return JSON for explicit AJAX requests that are not Inertia requests
+        if ($request->wantsJson() && !$request->header('X-Inertia')) {
             return response()->json($portfolioProject);
         }
 
@@ -102,8 +102,8 @@ class PortfolioController extends Controller
 
         $portfolioProjects = $query->with(['branding', 'industry', 'user'])->get();
 
-        // Only return JSON if explicitly requested with Accept: application/json header
-        if ($request->wantsJson()) {
+        // Only return JSON for explicit AJAX requests that are not Inertia requests
+        if ($request->wantsJson() && !$request->header('X-Inertia')) {
             return response()->json($portfolioProjects);
         }
 

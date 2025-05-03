@@ -17,8 +17,11 @@ createInertiaApp({
         // Render the App component directly
         root.render(<App {...props} />);
     },
-    // Disable the default progress bar since we're using our custom one
-    progress: false,
+    // Use Inertia's built-in progress feature
+    progress: {
+        color: 'var(--color-accent)',
+        showSpinner: false,
+    },
 });
 
 // This will set light / dark mode on load...

@@ -42,6 +42,10 @@ Route::get('/portfolio/{slug}', [App\Http\Controllers\PortfolioController::class
 
 Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs');
 Route::post('/blogs/filter', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs.filter');
+// Add a fallback route to handle both GET and POST requests with the same controller method
+Route::match(['get', 'post'], '/blogs/filter', [App\Http\Controllers\BlogController::class, 'index']);
+// Add a route for blog tags - must come before the general slug route
+Route::get('/blogs/tag/{slug}', [App\Http\Controllers\BlogController::class, 'index'])->name('blog.tag');
 Route::get('/blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 Route::get('/blogs/{slug}/related', [App\Http\Controllers\BlogController::class, 'related'])->name('blog.related');
 

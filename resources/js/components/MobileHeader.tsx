@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 import TextualLogo from './TextualLogo';
 
 const MobileHeader = ({ toggleSearch }: any) => {
@@ -26,7 +26,7 @@ const MobileHeader = ({ toggleSearch }: any) => {
             </Link>
 
             <div className="flex items-center">
-                <button onClick={toggleSearch} className="mr-4 p-2 cursor-pointer">
+                <button onClick={toggleSearch} className="mr-4 cursor-pointer p-2">
                     <svg
                         className="block"
                         width="20px"
@@ -57,7 +57,7 @@ const MobileHeader = ({ toggleSearch }: any) => {
                 </button>
 
                 <button
-                    className="flex h-10 w-10 items-center justify-center rounded-md p-2 focus:outline-none"
+                    className="flex h-10 w-10 items-center justify-center rounded-md p-2 focus:outline-none cursor-pointer"
                     onClick={toggleMenu}
                     aria-label="Toggle menu"
                 >
@@ -100,10 +100,19 @@ const MobileHeader = ({ toggleSearch }: any) => {
                         >
                             Portfolio
                         </Link>
-                        <Link className="flex items-center px-0 py-7 text-2xl/8 font-semibold text-[#0a2550] hover:text-[#4ecdc4]" href={route('blogs')} onClick={closeMenu}>
+                        <Link
+                            className="flex items-center px-0 py-7 text-2xl/8 font-semibold text-[#0a2550] hover:text-[#4ecdc4]"
+                            href={route('blogs')}
+                            method="get"
+                            onClick={closeMenu}
+                        >
                             Blogs
                         </Link>
-                        <Link className="flex items-center px-0 py-7 text-2xl/8 font-semibold text-[#0a2550] hover:text-[#4ecdc4]" href={route('about')} onClick={closeMenu}>
+                        <Link
+                            className="flex items-center px-0 py-7 text-2xl/8 font-semibold text-[#0a2550] hover:text-[#4ecdc4]"
+                            href={route('about')}
+                            onClick={closeMenu}
+                        >
                             About
                         </Link>
                         <Link

@@ -52,18 +52,38 @@ class BlogPostController extends Controller
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'featured_image' => 'nullable|image|max:5120', // Increased from 2MB to 5MB
+            'thumbnail_image' => 'nullable|image|max:5120', // Thumbnail image for blog cards
             'is_published' => 'boolean',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
 
         // Generate slug from title
-        $validated['slug'] = Str::slug($validated['title']);
+        $slug = Str::slug($validated['title']);
+
+        // Check if the slug already exists
+        $slugExists = BlogPost::where('slug', $slug)->exists();
+
+        // If the slug exists, append a random string
+        if ($slugExists) {
+            $slug = $slug . '-' . Str::random(5);
+        }
+
+        $validated['slug'] = $slug;
 
         // Handle featured image upload
         if ($request->hasFile('featured_image')) {
             $path = $request->file('featured_image')->store('blog', 'public');
             $validated['featured_image'] = $path;
+        }
+
+        // Handle thumbnail image upload
+        if ($request->hasFile('thumbnail_image')) {
+            $path = $request->file('thumbnail_image')->store('blog/thumbnails', 'public');
+            $validated['thumbnail_image'] = $path;
+        } elseif ($request->hasFile('featured_image')) {
+            // If no thumbnail is uploaded but a featured image is, use the featured image as thumbnail
+            $validated['thumbnail_image'] = $validated['featured_image'];
         }
 
         // Set user_id and published_at
@@ -127,6 +147,7 @@ class BlogPostController extends Controller
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'featured_image' => 'nullable|image|max:5120', // Increased from 2MB to 5MB
+            'thumbnail_image' => 'nullable|image|max:5120', // Thumbnail image for blog cards
             'is_published' => 'boolean',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
@@ -141,11 +162,52 @@ class BlogPostController extends Controller
 
             $path = $request->file('featured_image')->store('blog', 'public');
             $validated['featured_image'] = $path;
+
+            // If no thumbnail is uploaded but a new featured image is, use the new featured image as thumbnail
+            if (!$request->hasFile('thumbnail_image')) {
+                $validated['thumbnail_image'] = $path;
+            }
+        } else {
+            // If no new image is uploaded, remove featured_image from validated data
+            // to prevent overwriting the existing image path with null
+            unset($validated['featured_image']);
+        }
+
+        // Handle thumbnail image upload
+        if ($request->hasFile('thumbnail_image')) {
+            // Delete old thumbnail image if exists
+            if ($blogPost->thumbnail_image && $blogPost->thumbnail_image !== $blogPost->featured_image) {
+                Storage::disk('public')->delete($blogPost->thumbnail_image);
+            }
+
+            $path = $request->file('thumbnail_image')->store('blog/thumbnails', 'public');
+            $validated['thumbnail_image'] = $path;
+        } else {
+            // If no new thumbnail is uploaded, remove thumbnail_image from validated data
+            // to prevent overwriting the existing thumbnail image path with null
+            unset($validated['thumbnail_image']);
         }
 
         // Update published_at if publishing status changed
         if (!$blogPost->is_published && $validated['is_published']) {
             $validated['published_at'] = now();
+        }
+
+        // Update slug if title has changed
+        if ($blogPost->title !== $validated['title']) {
+            $slug = Str::slug($validated['title']);
+
+            // Check if the slug already exists (excluding the current blog post)
+            $slugExists = BlogPost::where('slug', $slug)
+                ->where('id', '!=', $blogPost->id)
+                ->exists();
+
+            // If the slug exists, append a random string
+            if ($slugExists) {
+                $slug = $slug . '-' . Str::random(5);
+            }
+
+            $validated['slug'] = $slug;
         }
 
         // Update blog post
@@ -172,6 +234,11 @@ class BlogPostController extends Controller
         // Delete featured image if exists
         if ($blogPost->featured_image) {
             Storage::disk('public')->delete($blogPost->featured_image);
+        }
+
+        // Delete thumbnail image if exists and is different from featured image
+        if ($blogPost->thumbnail_image && $blogPost->thumbnail_image !== $blogPost->featured_image) {
+            Storage::disk('public')->delete($blogPost->thumbnail_image);
         }
 
         // Delete blog post

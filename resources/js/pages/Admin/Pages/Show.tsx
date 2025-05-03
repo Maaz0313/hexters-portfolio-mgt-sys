@@ -1,11 +1,8 @@
-import React from 'react';
-import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Edit, ArrowLeft, Trash } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
 import { format } from 'date-fns';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, Edit, Trash } from 'lucide-react';
 
 interface Page {
     id: number;
@@ -42,104 +39,122 @@ const Show = ({ page }: Props) => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`Page: ${page.title}`} />
+            <div className="py-12">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="bg-card overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="bg-card border-border border-b p-6">
+                            <div className="mb-6 flex items-center justify-between">
+                                <h1 className="title-text text-primary text-2xl font-bold">Page: {page.title}</h1>
+                                <div className="flex space-x-2">
+                                    <Link
+                                        href={route('admin.pages.index')}
+                                        className="bg-muted text-muted-foreground hover:bg-muted/80 ring-muted inline-flex cursor-pointer items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold tracking-widest uppercase transition focus:ring focus:outline-none disabled:opacity-25"
+                                    >
+                                        <ArrowLeft className="mr-2 h-4 w-4" />
+                                        Back
+                                    </Link>
+                                    <Link
+                                        href={route('admin.pages.edit', page.id)}
+                                        className="bg-primary text-primary-foreground hover:bg-primary/90 ring-primary inline-flex cursor-pointer items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold tracking-widest uppercase transition focus:ring focus:outline-none disabled:opacity-25"
+                                    >
+                                        <Edit className="mr-2 h-4 w-4" />
+                                        Edit
+                                    </Link>
+                                    <Link
+                                        href={route('admin.pages.destroy', page.id)}
+                                        method="delete"
+                                        as="button"
+                                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90 ring-destructive inline-flex cursor-pointer items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold tracking-widest uppercase transition focus:ring focus:outline-none disabled:opacity-25"
+                                        onClick={(e) => {
+                                            if (!confirm('Are you sure you want to delete this page?')) {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                    >
+                                        <Trash className="mr-2 h-4 w-4" />
+                                        Delete
+                                    </Link>
+                                </div>
+                            </div>
 
-            <div className="flex items-center justify-between mb-6">
-                <h1 className="text-2xl font-semibold">Page: {page.title}</h1>
-                <div className="flex space-x-2">
-                    <Button variant="outline" asChild>
-                        <Link href={route('admin.pages.index')}>
-                            <ArrowLeft className="w-4 h-4 mr-2" />
-                            Back
-                        </Link>
-                    </Button>
-                    <Button variant="outline" asChild>
-                        <Link href={route('admin.pages.edit', page.id)}>
-                            <Edit className="w-4 h-4 mr-2" />
-                            Edit
-                        </Link>
-                    </Button>
-                    <Button
-                        variant="destructive"
-                        onClick={() => {
-                            if (confirm('Are you sure you want to delete this page?')) {
-                                // Use Inertia to delete
-                                const form = document.createElement('form');
-                                form.method = 'POST';
-                                form.action = route('admin.pages.destroy', page.id);
-                                const methodInput = document.createElement('input');
-                                methodInput.type = 'hidden';
-                                methodInput.name = '_method';
-                                methodInput.value = 'DELETE';
-                                form.appendChild(methodInput);
-                                const csrfInput = document.createElement('input');
-                                csrfInput.type = 'hidden';
-                                csrfInput.name = '_token';
-                                csrfInput.value = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-                                form.appendChild(csrfInput);
-                                document.body.appendChild(form);
-                                form.submit();
-                            }
-                        }}
-                    >
-                        <Trash className="w-4 h-4 mr-2" />
-                        Delete
-                    </Button>
-                </div>
-            </div>
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                                <div className="space-y-6 md:col-span-2">
+                                    {/* Content Preview */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">Content Preview</h2>
+                                        <div className="border-border bg-muted rounded-lg border p-4">
+                                            <div
+                                                className="prose text-card-foreground max-w-none"
+                                                dangerouslySetInnerHTML={{ __html: page.content }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
 
-            <div className="bg-card rounded-lg shadow p-6">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-6">
-                    <div>
-                        <h2 className="text-lg font-medium mb-2">Page Details</h2>
-                        <div className="space-y-2">
-                            <div>
-                                <span className="font-medium">Title:</span> {page.title}
-                            </div>
-                            <div>
-                                <span className="font-medium">Slug:</span> {page.slug}
-                            </div>
-                            <div>
-                                <span className="font-medium">Status:</span>{' '}
-                                {page.is_published ? (
-                                    <Badge variant="success">Published</Badge>
-                                ) : (
-                                    <Badge variant="secondary">Draft</Badge>
-                                )}
-                            </div>
-                            <div>
-                                <span className="font-medium">Created:</span>{' '}
-                                {format(new Date(page.created_at), 'MMM d, yyyy h:mm a')}
-                            </div>
-                            <div>
-                                <span className="font-medium">Last Updated:</span>{' '}
-                                {format(new Date(page.updated_at), 'MMM d, yyyy h:mm a')}
+                                <div className="space-y-6">
+                                    {/* Status */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">Status</h2>
+                                        <div className="bg-muted rounded-md p-4">
+                                            <div className="mb-2 flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Status:</span>
+                                                <span
+                                                    className={`rounded-full px-2 py-1 text-xs font-semibold ${page.is_published ? 'bg-accent/20 text-accent' : 'bg-muted-foreground/20 text-muted-foreground'}`}
+                                                >
+                                                    {page.is_published ? 'Published' : 'Draft'}
+                                                </span>
+                                            </div>
+                                            <div className="mb-2 flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Created:</span>
+                                                <span className="text-muted-foreground">{format(new Date(page.created_at), 'MMM d, yyyy')}</span>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Updated:</span>
+                                                <span className="text-muted-foreground">{format(new Date(page.updated_at), 'MMM d, yyyy')}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Page Details */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">Page Details</h2>
+                                        <div className="bg-muted space-y-3 rounded-md p-4">
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Title:</span>
+                                                <span className="text-muted-foreground">{page.title}</span>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Slug:</span>
+                                                <span className="text-muted-foreground">{page.slug}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* SEO Information */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">SEO Information</h2>
+                                        <div className="bg-muted space-y-3 rounded-md p-4">
+                                            <div>
+                                                <span className="text-card-foreground mr-2 font-medium">Meta Title:</span>
+                                                {page.meta_title ? (
+                                                    <span className="text-muted-foreground">{page.meta_title}</span>
+                                                ) : (
+                                                    <span className="text-muted-foreground italic">Not set</span>
+                                                )}
+                                            </div>
+                                            <div>
+                                                <span className="text-card-foreground mr-2 font-medium">Meta Description:</span>
+                                                {page.meta_description ? (
+                                                    <p className="text-muted-foreground">{page.meta_description}</p>
+                                                ) : (
+                                                    <span className="text-muted-foreground italic">Not set</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <h2 className="text-lg font-medium mb-2">SEO Information</h2>
-                        <div className="space-y-2">
-                            <div>
-                                <span className="font-medium">Meta Title:</span>{' '}
-                                {page.meta_title || <span className="text-muted-foreground italic">Not set</span>}
-                            </div>
-                            <div>
-                                <span className="font-medium">Meta Description:</span>{' '}
-                                {page.meta_description ? (
-                                    <p className="text-muted-foreground">{page.meta_description}</p>
-                                ) : (
-                                    <span className="text-muted-foreground italic">Not set</span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h2 className="text-lg font-medium mb-2">Content Preview</h2>
-                    <div className="border rounded-lg p-4 bg-background">
-                        <div dangerouslySetInnerHTML={{ __html: page.content }} />
                     </div>
                 </div>
             </div>

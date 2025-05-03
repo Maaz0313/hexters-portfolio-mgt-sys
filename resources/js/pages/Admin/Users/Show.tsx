@@ -1,11 +1,8 @@
-import React from 'react';
-import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Edit, ArrowLeft, Trash } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
 import { format } from 'date-fns';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, Edit, Trash } from 'lucide-react';
 
 interface Role {
     id: number;
@@ -47,95 +44,115 @@ const Show = ({ user }: Props) => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`User: ${user.name}`} />
+            <div className="py-12">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="bg-card overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="bg-card border-border border-b p-6">
+                            <div className="mb-6 flex items-center justify-between">
+                                <h1 className="title-text text-primary text-2xl font-bold">User: {user.name}</h1>
+                                <div className="flex space-x-2">
+                                    <Link
+                                        href={route('admin.users.index')}
+                                        className="bg-muted text-muted-foreground hover:bg-muted/80 ring-muted inline-flex cursor-pointer items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold tracking-widest uppercase transition focus:ring focus:outline-none disabled:opacity-25"
+                                    >
+                                        <ArrowLeft className="mr-2 h-4 w-4" />
+                                        Back
+                                    </Link>
+                                    <Link
+                                        href={route('admin.users.edit', user.id)}
+                                        className="bg-primary text-primary-foreground hover:bg-primary/90 ring-primary inline-flex cursor-pointer items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold tracking-widest uppercase transition focus:ring focus:outline-none disabled:opacity-25"
+                                    >
+                                        <Edit className="mr-2 h-4 w-4" />
+                                        Edit
+                                    </Link>
+                                    <Link
+                                        href={route('admin.users.destroy', user.id)}
+                                        method="delete"
+                                        as="button"
+                                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90 ring-destructive inline-flex cursor-pointer items-center rounded-md border border-transparent px-4 py-2 text-xs font-semibold tracking-widest uppercase transition focus:ring focus:outline-none disabled:opacity-25"
+                                        onClick={(e) => {
+                                            if (!confirm('Are you sure you want to delete this user?')) {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                    >
+                                        <Trash className="mr-2 h-4 w-4" />
+                                        Delete
+                                    </Link>
+                                </div>
+                            </div>
 
-            <div className="flex items-center justify-between mb-6">
-                <h1 className="text-2xl font-semibold">User: {user.name}</h1>
-                <div className="flex space-x-2">
-                    <Button variant="outline" asChild>
-                        <Link href={route('admin.users.index')}>
-                            <ArrowLeft className="w-4 h-4 mr-2" />
-                            Back
-                        </Link>
-                    </Button>
-                    <Button variant="outline" asChild>
-                        <Link href={route('admin.users.edit', user.id)}>
-                            <Edit className="w-4 h-4 mr-2" />
-                            Edit
-                        </Link>
-                    </Button>
-                    <Button
-                        variant="destructive"
-                        onClick={() => {
-                            if (confirm('Are you sure you want to delete this user?')) {
-                                // Use Inertia to delete
-                                const form = document.createElement('form');
-                                form.method = 'POST';
-                                form.action = route('admin.users.destroy', user.id);
-                                const methodInput = document.createElement('input');
-                                methodInput.type = 'hidden';
-                                methodInput.name = '_method';
-                                methodInput.value = 'DELETE';
-                                form.appendChild(methodInput);
-                                const csrfInput = document.createElement('input');
-                                csrfInput.type = 'hidden';
-                                csrfInput.name = '_token';
-                                csrfInput.value = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-                                form.appendChild(csrfInput);
-                                document.body.appendChild(form);
-                                form.submit();
-                            }
-                        }}
-                    >
-                        <Trash className="w-4 h-4 mr-2" />
-                        Delete
-                    </Button>
-                </div>
-            </div>
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                                <div className="space-y-6 md:col-span-2">
+                                    {/* User Details */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">User Details</h2>
+                                        <div className="bg-muted space-y-3 rounded-md p-4">
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Name:</span>
+                                                <span className="text-muted-foreground">{user.name}</span>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Email:</span>
+                                                <span className="text-muted-foreground">{user.email}</span>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Created:</span>
+                                                <span className="text-muted-foreground">
+                                                    {format(new Date(user.created_at), 'MMM d, yyyy h:mm a')}
+                                                </span>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Last Updated:</span>
+                                                <span className="text-muted-foreground">
+                                                    {format(new Date(user.updated_at), 'MMM d, yyyy h:mm a')}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-            <div className="bg-card rounded-lg shadow p-6">
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-6">
-                    <div>
-                        <h2 className="text-lg font-medium mb-2">User Details</h2>
-                        <div className="space-y-2">
-                            <div>
-                                <span className="font-medium">Name:</span> {user.name}
-                            </div>
-                            <div>
-                                <span className="font-medium">Email:</span> {user.email}
-                            </div>
-                            <div>
-                                <span className="font-medium">Admin Access:</span>{' '}
-                                {user.is_admin ? (
-                                    <Badge variant="success">Yes</Badge>
-                                ) : (
-                                    <Badge variant="secondary">No</Badge>
-                                )}
-                            </div>
-                            <div>
-                                <span className="font-medium">Created:</span>{' '}
-                                {format(new Date(user.created_at), 'MMM d, yyyy h:mm a')}
-                            </div>
-                            <div>
-                                <span className="font-medium">Last Updated:</span>{' '}
-                                {format(new Date(user.updated_at), 'MMM d, yyyy h:mm a')}
+                                <div className="space-y-6">
+                                    {/* Admin Status */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">Admin Status</h2>
+                                        <div className="bg-muted rounded-md p-4">
+                                            <div className="flex items-center">
+                                                <span className="text-card-foreground mr-2 font-medium">Admin Access:</span>
+                                                {user.is_admin ? (
+                                                    <span className="bg-accent/20 text-accent rounded-full px-2 py-1 text-xs font-semibold">Yes</span>
+                                                ) : (
+                                                    <span className="bg-muted-foreground/20 text-muted-foreground rounded-full px-2 py-1 text-xs font-semibold">
+                                                        No
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Roles */}
+                                    <div>
+                                        <h2 className="text-primary mb-2 text-lg font-medium">Roles</h2>
+                                        <div className="bg-muted rounded-md p-4">
+                                            {user.roles.length > 0 ? (
+                                                <div className="space-y-2">
+                                                    {user.roles.map((role) => (
+                                                        <div key={role.id} className="border-border rounded-md border p-3">
+                                                            <div className="text-card-foreground font-medium">{role.name}</div>
+                                                            {role.description && (
+                                                                <div className="text-muted-foreground mt-1 text-sm">{role.description}</div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                <span className="text-muted-foreground italic">No roles assigned</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <h2 className="text-lg font-medium mb-2">Roles</h2>
-                        {user.roles.length === 0 ? (
-                            <p className="text-muted-foreground">No roles assigned.</p>
-                        ) : (
-                            <div className="space-y-2">
-                                {user.roles.map((role) => (
-                                    <div key={role.id} className="p-3 border rounded-md">
-                                        <div className="font-medium">{role.name}</div>
-                                        <div className="text-sm text-muted-foreground">{role.description}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>

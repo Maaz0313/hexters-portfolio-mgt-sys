@@ -29,6 +29,7 @@ const DesktopHeader = ({ toggleSearch }: any) => {
                         <Link
                             className="h-full hover:border-b-2 hover:border-[#4ecdc4] hover:text-[#4ecdc4] lg:flex lg:items-center lg:px-4 lg:text-base/4 lg:font-medium lg:text-[#0a2550]"
                             href={route('blogs')}
+                            method="get"
                         >
                             Blogs
                         </Link>
@@ -41,7 +42,10 @@ const DesktopHeader = ({ toggleSearch }: any) => {
                     </div>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-evenly">
-                    <button onClick={toggleSearch} className="lg:text-secondary m-0 lg:mr-4 lg:border-none lg:bg-transparent lg:p-3 lg:leading-[0] cursor-pointer">
+                    <button
+                        onClick={toggleSearch}
+                        className="lg:text-secondary m-0 cursor-pointer lg:mr-4 lg:border-none lg:bg-transparent lg:p-3 lg:leading-[0]"
+                    >
                         <svg
                             className="block"
                             width="20px"
