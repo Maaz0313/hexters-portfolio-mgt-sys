@@ -1,4 +1,4 @@
-import { Breadcrumbs } from '@/components/breadcrumbs';
+import { Breadcrumbs } from '@/components/admin/breadcrumbs';
 import { Icon } from '@/components/icon';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -59,17 +59,10 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                             </SheetTrigger>
                             <SheetContent side="left" className="bg-sidebar flex h-full w-64 flex-col items-stretch justify-between">
                                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                                <SheetHeader className="flex justify-start text-left p-4">
+                                <SheetHeader className="flex justify-start p-4 text-left">
                                     <div className="flex items-center gap-2">
-                                        <img
-                                            src="/images/logos/logo white.png"
-                                            alt="Hexters Logo Icon"
-                                            className="h-7 w-auto"
-                                        />
-                                        <span
-                                            className="font-title text-2xl text-primary tracking-wide"
-                                            style={{ fontFamily: 'var(--font-title)' }}
-                                        >
+                                        <img src="/images/logos/logo white.png" alt="Hexters Logo Icon" className="h-7 w-auto" />
+                                        <span className="font-title text-primary text-2xl tracking-wide" style={{ fontFamily: 'var(--font-title)' }}>
                                             HEXTERS
                                         </span>
                                     </div>
