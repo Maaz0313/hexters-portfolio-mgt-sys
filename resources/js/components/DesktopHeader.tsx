@@ -9,7 +9,7 @@ const DesktopHeader = ({ toggleSearch }: any) => {
                     <div className="flex items-center">
                         <img src="/images/logos/logo white.png" alt="Hexters Logo" width={40} height={40} className="mr-3 block dark:hidden" />
                         <img src="/images/logos/logo black.png" alt="Hexters Logo" width={40} height={40} className="mr-3 hidden dark:block" />
-                        <TextualLogo size="lg" showTagline={true} />
+                        <TextualLogo size="lg"/>
                     </div>
                 </Link>
                 <div className="menu">

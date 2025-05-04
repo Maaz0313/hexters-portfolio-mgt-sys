@@ -36,6 +36,18 @@ Route::get('/amazon', function () {
     return inertia('Amazon');
 })->name('amazon');
 
+Route::get('/logo-designing', function () {
+    return inertia('LogoDesigning');
+})->name('logo-designing');
+
+Route::get('/2d-sketching', function () {
+    return inertia('Sketching2D');
+})->name('2d-sketching');
+
+Route::get('/3d-modeling', function () {
+    return inertia('Modeling3D');
+})->name('3d-modeling');
+
 Route::get('/portfolio', [App\Http\Controllers\PortfolioController::class, 'index'])->name('portfolio');
 Route::post('/portfolio/filter', [App\Http\Controllers\PortfolioController::class, 'index'])->name('portfolio.filter');
 Route::get('/portfolio/{slug}', [App\Http\Controllers\PortfolioController::class, 'show'])->name('portfolio.show');

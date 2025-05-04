@@ -1,5 +1,4 @@
 import PortfolioLayout from '@/layouts/portfolio-layout';
-import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { FaBook, FaChartLine, FaLayerGroup, FaPalette } from 'react-icons/fa';
 
@@ -44,55 +43,54 @@ function Branding() {
 
     return (
         <PortfolioLayout title="Branding Services">
-            {/* Hero section - Updated to be different from Services.jsx */}
-            <section className="bg-muted relative overflow-hidden py-32 text-white">
-                <div className="relative z-5 container mx-auto px-8">
+            {/* Hero section - Updated to reduce eye strain */}
+            <section className="relative overflow-hidden py-32" style={{ backgroundColor: '#0a2550' }}>
+                <div className="from-primary/90 to-primary absolute inset-0 bg-gradient-to-br opacity-80"></div>
+                <div className="relative z-10 container mx-auto px-8">
                     <div className="flex flex-col items-center md:flex-row">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7 }}
-                            className="relative z-1 mb-12 text-center md:mb-0 md:w-1/2 md:pr-12 md:text-left"
+                            className="mb-12 text-center md:mb-0 md:w-1/2 md:pr-12 md:text-left"
                         >
-                            <h1 className="title-text mb-6 text-5xl leading-tight font-normal md:text-7xl">
-                                Craft Your <span className="text-primary">Brand Story</span>
+                            <h1 className="title-text text-secondary mb-6 text-5xl leading-tight font-normal md:text-7xl">
+                                Craft Your <span className="text-secondary">Brand Story</span>
                             </h1>
-                            <p className="mb-10 max-w-xl text-xl text-white/90 md:text-2xl">
+                            <p className="text-secondary/90 mb-10 max-w-xl text-xl md:text-2xl">
                                 We transform ideas into powerful brand identities that resonate with your audience and stand the test of time.
                             </p>
-                            <motion.div
-                                className="relative z-10"
+                            <motion.a
+                                href="/contact"
+                                className="bg-secondary text-primary inline-flex h-[56px] w-fit items-center justify-center rounded-[80px] border-none px-8 font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
                                 whileHover={{
                                     scale: 1.05,
+                                    backgroundColor: 'white',
+                                    color: 'var(--color-primary)',
                                 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <Link
-                                    href={route('contact')}
-                                    className="bg-secondary relative z-10 inline-flex h-[56px] w-fit cursor-pointer items-center justify-center rounded-[80px] border-none px-8 font-medium text-white shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white hover:text-[var(--color-secondary)] hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-                                >
-                                    Start Your Brand Journey
-                                </Link>
-                            </motion.div>
+                                Start Your Brand Journey
+                            </motion.a>
                         </motion.div>
 
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.7, delay: 0.2 }}
-                            className="relative z-10 md:w-1/2"
+                            className="relative md:w-1/2"
                         >
-                            <div className="relative z-20">
-                                <img src="/images/branding.webp" alt="Branding Concept" className="relative z-20 rounded-2xl shadow-2xl" />
+                            <div className="relative z-10">
+                                <img src="/images/branding.webp" alt="Branding Concept" className="rounded-2xl shadow-2xl" />
                                 <motion.div
-                                    className="bg-primary absolute -top-6 -right-6 z-10 h-24 w-24 rounded-full opacity-80"
+                                    className="bg-secondary/70 absolute -top-6 -right-6 h-24 w-24 rounded-full opacity-80"
                                     animate={{
                                         scale: [1, 1.2, 1],
                                     }}
                                     transition={{ repeat: Infinity, duration: 3 }}
                                 />
                                 <motion.div
-                                    className="bg-primary absolute -bottom-8 -left-8 z-10 h-32 w-32 rounded-full opacity-60"
+                                    className="bg-secondary/50 absolute -bottom-8 -left-8 h-32 w-32 rounded-full opacity-60"
                                     animate={{
                                         scale: [1, 1.3, 1],
                                     }}
@@ -105,15 +103,17 @@ function Branding() {
 
                 {/* Background decorative elements */}
                 <motion.div
-                    className="bg-primary absolute top-0 right-0 z-0 h-96 w-96 rounded-full opacity-10 blur-3xl"
+                    className="bg-secondary/20 absolute top-0 right-0 h-96 w-96 rounded-full opacity-10 blur-3xl"
                     animate={{
+                        x: [0, 30, 0],
                         y: [0, -30, 0],
                     }}
                     transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
                 />
                 <motion.div
-                    className="bg-primary absolute bottom-0 left-0 z-0 h-80 w-80 rounded-full opacity-20 blur-3xl"
+                    className="bg-secondary/20 absolute bottom-0 left-0 h-80 w-80 rounded-full opacity-20 blur-3xl"
                     animate={{
+                        x: [0, -20, 0],
                         y: [0, 20, 0],
                     }}
                     transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
@@ -133,8 +133,8 @@ function Branding() {
                     }}
                 ></div>
                 {/* Decorative elements */}
-                <div className="bg-accent/10 absolute top-0 right-0 z-0 h-64 w-64 rounded-full blur-3xl"></div>
-                <div className="bg-accent/10 absolute bottom-0 left-0 z-0 h-64 w-64 rounded-full blur-3xl"></div>
+                <div className="bg-accent/10 absolute top-0 right-0 h-64 w-64 rounded-full blur-3xl"></div>
+                <div className="bg-accent/10 absolute bottom-0 left-0 h-64 w-64 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 container mx-auto px-8">
                     <motion.div
@@ -181,31 +181,31 @@ function Branding() {
             </section>
 
             {/* CTA section */}
-            <section className="bg-accent relative py-20">
-                <div className="relative z-5 container mx-auto px-8">
+            <section className="py-20" style={{ backgroundColor: '#163561' }}>
+                <div className="container mx-auto px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="relative z-1 mx-auto max-w-3xl text-center"
+                        className="mx-auto max-w-3xl text-center"
                     >
-                        <h2 className="title-text text-secondary mb-6 text-4xl font-normal md:text-5xl">Ready to Build Your Brand?</h2>
-                        <p className="text-muted mb-10 text-xl/relaxed">Let's create a powerful brand identity that connects with your audience</p>
-                        <motion.div
-                            className="relative z-10"
+                        <h2 className="title-text text-stone-200 mb-6 text-4xl font-normal md:text-5xl">Ready to Build Your Brand?</h2>
+                        <p className="text-stone-200/90 mb-10 text-xl/relaxed">
+                            Let's create a powerful brand identity that connects with your audience
+                        </p>
+                        <motion.a
+                            href="/contact"
+                            className="bg-secondary text-white inline-flex h-[56px] w-fit items-center justify-center rounded-[80px] border-none px-8 font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
                             whileHover={{
                                 scale: 1.05,
+                                backgroundColor: 'white',
+                                color: 'var(--color-secondary)',
                             }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <Link
-                                href={route('contact')}
-                                className="bg-secondary hover:text-secondary relative z-10 inline-flex h-[56px] w-fit cursor-pointer items-center justify-center rounded-[80px] border-none px-8 font-medium text-white shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-                            >
-                                Get Started
-                            </Link>
-                        </motion.div>
+                            Get Started
+                        </motion.a>
                     </motion.div>
                 </div>
             </section>

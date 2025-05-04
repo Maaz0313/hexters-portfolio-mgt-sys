@@ -1,5 +1,4 @@
 import PortfolioLayout from '@/layouts/portfolio-layout';
-import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { FaChartBar, FaChartLine, FaFileAlt, FaHashtag } from 'react-icons/fa';
 
@@ -128,20 +127,18 @@ const Marketing = () => {
                         <p className="mb-10 text-xl/relaxed text-white/90">
                             Let's create a marketing strategy that drives real results for your business
                         </p>
-                        <motion.div
-                            className="relative z-10"
+                        <motion.a
+                            href="/contact"
+                            className="bg-secondary inline-flex h-[56px] w-fit items-center justify-center rounded-[80px] border-none px-8 font-medium text-white shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300"
                             whileHover={{
                                 scale: 1.05,
+                                backgroundColor: 'white',
+                                color: 'var(--color-secondary)',
                             }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <Link
-                                href={route('contact')}
-                                className="bg-secondary relative z-10 inline-flex h-[56px] w-fit cursor-pointer items-center justify-center rounded-[80px] border-none px-8 font-medium text-white shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white hover:text-[var(--color-secondary)] hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-                            >
-                                Get Started
-                            </Link>
-                        </motion.div>
+                            Get Started
+                        </motion.a>
                     </motion.div>
                 </div>
             </section>

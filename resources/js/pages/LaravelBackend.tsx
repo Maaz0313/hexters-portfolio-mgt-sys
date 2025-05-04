@@ -61,20 +61,18 @@ const LaravelBackend = () => {
                             <p className="mb-8 text-xl/relaxed text-white/90">
                                 Secure, scalable & maintainable backend solutions with Laravel's elegant syntax & powerful features
                             </p>
-                            <motion.div
-                                className="relative z-10"
+                            <motion.a
+                                href="/contact"
+                                className="bg-primary text-primary-foreground inline-flex h-[56px] w-fit items-center justify-center rounded-[80px] border-none px-8 font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
                                 whileHover={{
                                     scale: 1.05,
+                                    backgroundColor: 'white',
+                                    color: 'var(--color-primary)',
                                 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <Link
-                                    href={route('contact')}
-                                    className="bg-primary text-primary-foreground relative z-10 inline-flex h-[56px] w-fit cursor-pointer items-center justify-center rounded-[80px] border-none px-8 font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white hover:text-[var(--color-primary)] hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-                                >
-                                    Get a Quote
-                                </Link>
-                            </motion.div>
+                                Get a Quote
+                            </motion.a>
                         </motion.div>
 
                         <motion.div
@@ -240,20 +238,18 @@ const LaravelBackend = () => {
                         <p className="mb-10 text-xl/relaxed text-white/90">
                             Let's discuss how we can help you create a robust, scalable backend for your next project
                         </p>
-                        <motion.div
-                            className="relative z-10"
+                        <motion.a
+                            href="/contact"
+                            className="bg-primary text-primary-foreground inline-flex h-[56px] w-fit items-center justify-center rounded-[80px] border-none px-8 font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
                             whileHover={{
                                 scale: 1.05,
+                                backgroundColor: 'white',
+                                color: 'var(--color-primary)',
                             }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <Link
-                                href={route('contact')}
-                                className="bg-primary text-primary-foreground relative z-10 inline-flex h-[56px] w-fit cursor-pointer items-center justify-center rounded-[80px] border-none px-8 font-medium shadow-[0_6px_12px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white hover:text-[var(--color-primary)] hover:shadow-[0_10px_24px_rgba(0,0,0,0.3),0_6px_12px_rgba(0,0,0,0.3)]"
-                            >
-                                Get in Touch
-                            </Link>
-                        </motion.div>
+                            Get in Touch
+                        </motion.a>
                     </motion.div>
                 </div>
             </section>

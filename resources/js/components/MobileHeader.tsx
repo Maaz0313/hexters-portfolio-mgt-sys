@@ -1,9 +1,16 @@
 import { Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TextualLogo from './TextualLogo';
 
-const MobileHeader = ({ toggleSearch }: any) => {
+const MobileHeader = ({ toggleSearch, isSearchVisible }: any) => {
     const [isOpen, setIsOpen] = useState(false);
+
+    // Close menu when search is opened
+    useEffect(() => {
+        if (isSearchVisible && isOpen) {
+            closeMenu();
+        }
+    }, [isSearchVisible]);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -15,18 +22,26 @@ const MobileHeader = ({ toggleSearch }: any) => {
         document.body.style.overflow = '';
     };
 
+    // Custom search toggle that also closes the menu
+    const handleSearchToggle = () => {
+        if (isOpen) {
+            closeMenu();
+        }
+        toggleSearch();
+    };
+
     return (
         <header className="relative z-50 flex h-[70px] items-center justify-between bg-[#f5f5f5] px-4 text-[#0a2550] lg:hidden">
             <Link href={route('home')} className="flex items-center">
                 <div className="flex items-center">
                     <img src="/images/logos/logo white.png" alt="Hexters Logo" width={30} height={30} className="mr-3 block dark:hidden" />
                     <img src="/images/logos/logo black.png" alt="Hexters Logo" width={30} height={30} className="mr-3 hidden dark:block" />
-                    <TextualLogo size="md" showTagline={false} />
+                    <TextualLogo size="md"/>
                 </div>
             </Link>
 
             <div className="flex items-center">
-                <button onClick={toggleSearch} className="mr-4 cursor-pointer p-2">
+                <button onClick={handleSearchToggle} className="mr-4 cursor-pointer rounded-full bg-[var(--color-muted)] p-2 text-white">
                     <svg
                         className="block"
                         width="20px"
@@ -57,30 +72,45 @@ const MobileHeader = ({ toggleSearch }: any) => {
                 </button>
 
                 <button
-                    className="flex h-10 w-10 items-center justify-center rounded-md p-2 focus:outline-none cursor-pointer"
+                    className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-md p-2 focus:outline-none"
                     onClick={toggleMenu}
                     aria-label="Toggle menu"
                 >
-                    <svg
-                        className={`h-6 w-6 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <div
+                        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
                     >
-                        {isOpen ? (
+                        <svg
+                            className="h-6 w-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                        >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        ) : (
+                        </svg>
+                    </div>
+                    <div
+                        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+                    >
+                        <svg
+                            className="h-6 w-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                        >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        )}
-                    </svg>
+                        </svg>
+                    </div>
                 </button>
             </div>
 
             {/* Mobile menu */}
             <div
                 className={`fixed inset-0 z-50 flex flex-col bg-white transition-transform duration-300 ease-in-out ${
-                    isOpen ? 'translate-x-0' : 'translate-x-full'
+                    isOpen && !isSearchVisible ? 'translate-x-0' : 'translate-x-full'
                 }`}
                 style={{ top: '70px' }}
             >

@@ -9,7 +9,7 @@ const Footer = () => {
                     <Link aria-current="page" href={route('home')} className="inline-flex items-center">
                         <img src="/images/logos/logo white.png" alt="Hexters Logo" width={40} height={40} className="mr-3 hidden dark:block" />
                         <img src="/images/logos/logo black.png" alt="Hexters Logo" width={40} height={40} className="mr-3 block dark:hidden" />
-                        <TextualLogo size="lg" showTagline={true} className="text-white [&>span]:text-white" />
+                        <TextualLogo size="lg" className="text-white [&>span]:text-white" />
                     </Link>
                 </div>
                 <div className="grid grid-flow-row max-[1219px]:[row-gap:32px] md:grid-cols-[repeat(12,1fr)] lg:[grid-column-gap:24px]">
@@ -162,7 +162,7 @@ const Footer = () => {
                 <div className="mt-16 border-t border-t-[color:var(--color-foreground)] pt-8">
                     <div className="-mx-3 flex flex-wrap text-white">
                         <div className="order-2 mt-8 w-full px-3 py-0 text-center">
-                            <p>Hexters is a registered trademark of Hexters Digital Agency</p>
+                            <p>Hexters is a registered trademark of Hexters Limited</p>
                         </div>
                         <div className="order-1 flex w-full flex-wrap justify-center space-x-8 px-3 py-0">
                             <div>

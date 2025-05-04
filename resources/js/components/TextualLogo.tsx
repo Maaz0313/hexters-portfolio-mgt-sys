@@ -3,10 +3,9 @@ import React from 'react';
 interface TextualLogoProps {
     className?: string;
     size?: 'sm' | 'md' | 'lg';
-    showTagline?: boolean;
 }
 
-const TextualLogo: React.FC<TextualLogoProps> = ({ className = '', size = 'md', showTagline = false }) => {
+const TextualLogo: React.FC<TextualLogoProps> = ({ className = '', size = 'md'}) => {
     const sizeClasses = {
         sm: 'text-2xl',
         md: 'text-3xl',
@@ -27,7 +26,6 @@ const TextualLogo: React.FC<TextualLogoProps> = ({ className = '', size = 'md', 
             >
                 HEXTERS
             </span>
-            {showTagline && <span className={`${taglineSizeClasses[size]} font-sans tracking-wide`}>DIGITAL AGENCY</span>}
         </div>
     );
 };

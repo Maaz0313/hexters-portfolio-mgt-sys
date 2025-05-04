@@ -46,7 +46,7 @@ function Layout({ children }: LayoutProps) {
         <div className="relative">
             <ProgressBar isAnimating={isNavigating} />
             <DesktopHeader toggleSearch={toggleSearch} />
-            <MobileHeader toggleSearch={toggleSearch} />
+            <MobileHeader toggleSearch={toggleSearch} isSearchVisible={isSearchVisible} />
             <SearchBar isVisible={isSearchVisible} toggleSearch={toggleSearch} />
             <main>{children}</main>
             <Footer />
