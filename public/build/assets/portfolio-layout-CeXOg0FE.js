@@ -1,0 +1,1 @@
+import{j as o,L as t}from"./Layout-BFS5gtk9.js";import{L as a}from"./Layout-DsSlTJcM.js";function x({children:s,title:r}){return o.jsxs(o.Fragment,{children:[r&&o.jsx(t,{title:r}),o.jsx(a,{children:s})]})}export{x as P};
